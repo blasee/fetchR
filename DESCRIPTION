@@ -1,0 +1,17 @@
+Package: fetchR
+Type: Package
+Title: Calculate fetch in New Zealand
+Version: 1.0-0
+Date: 2014-08-27
+Authors@R: person("Blake", "Seers", role = c("aut", "cre"),
+    email = "blake.seers@gmail.com")
+Imports:
+    sp
+Suggests:
+    knitr
+URL: http://en.wikipedia.org/wiki/Fetch_(geography)
+Description: fetchR is an R package for calculating fetch (exposure). The
+    current convention for calculating fetch is to sum the distances from the
+    location to the shoreline (up to a maximum distance) for every 10 degrees
+    on the compass rose. This is the implementation fetchR currently supports.
+License: GPL-2
