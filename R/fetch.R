@@ -121,8 +121,8 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, n_angles = 10,
   
   bound_matrix = matrix(c(min(my_circle$lon), min(my_circle$lat),
                           min(my_circle$lon), max(my_circle$lat),
+                          max(my_circle$lon), max(my_circle$lat),
                           max(my_circle$lon), min(my_circle$lat),
-                          min(my_circle$lon), min(my_circle$lat),
                           min(my_circle$lon), min(my_circle$lat)),
                         ncol = 2, byrow = TRUE)
   bound_poly_p = Polygon(bound_matrix)
@@ -131,9 +131,9 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, n_angles = 10,
                                    proj4string = CRS(proj4string(nz_coast)))
   
   
-  in_plot_area_islands = over(bound_poly_sps, nz_islands)
+  in_plot_area_islands = which(!is.na(over(nz_islands, bound_poly_sps)))
   nz_islands_subset = nz_islands[in_plot_area_islands, ]
-  in_plot_area_coast = over(bound_poly_sps, nz_coast)
+  in_plot_area_coast = which(!is.na(over(nz_coast, bound_poly_sps)))
   nz_coast_subset = nz_coast[in_plot_area_coast, ]
   
   if (isTRUE(plot)){
@@ -142,9 +142,10 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, n_angles = 10,
     
     png(filename = paste0("Fetch_", paste(coordinates(centre_point), 
                                           collapse = "_"), ".png"), ...)
+    on.exit(dev.off())
     plot(my_circle, type = 'n')
-    plot(nz_coast_subset, add = TRUE)
-    plot(nz_islands_subset, add = TRUE)
+    plot(nz_coast_subset, add = TRUE, col = "lightgrey")
+    plot(nz_islands_subset, add = TRUE, col = "lightgrey")
     points(centre_point)
   }
   
@@ -173,7 +174,7 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, n_angles = 10,
         if (i == 1){
           my_previous_circle = my_circle
           warning(sum(on_land), " directions are less than ", accuracy, 
-                  "m from land")
+                  "m from land", immediate. = TRUE)
         }
         else
           j = i - 1
@@ -183,10 +184,9 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, n_angles = 10,
                                       round(360 / (pi * 2) * 
                                               directions[on_land], 2),
                                       if (i == 1)
-                                        0
+                                        rep(0, sum(on_land))
                                       else
                                         outer_radii[rep(j, sum(on_land))] / 1000)
-      
       directions = directions[!on_land]
       rows = rows[!on_land]
     }
@@ -194,7 +194,10 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, n_angles = 10,
     percent_done = i / length(outer_radii) * 100
     if ((percent_done %% 10 == 0) && !isTRUE(quiet))
       message(paste0(percent_done, "% calculated"))
+    if (length(directions) == 0)
+      break
   }
+  
   if (isTRUE(plot)){
     if (!isTRUE(quiet))
       message("preparing plot")
@@ -203,11 +206,14 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, n_angles = 10,
     lats = c(t(data.frame(coordinates(centre_point)[2],
                           end_points[, 2])))
     lines(x = lons, y = lats, col = 'red')
-    graphics.off()
     if (!isTRUE(quiet))
       message("plot saved in ", normalizePath("."))
   }
   message("average fetch = ", mean(end_points$distance), " km")
+  message("median fetch = ", median(end_points$distance), " km")
+  which_max = which(end_points$distance == max(end_points$distance))
+  message("most exposed directions: ", paste(end_points$direction[which_max],
+                                             collapse = ", "))
   invisible(end_points)
 }
 
