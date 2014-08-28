@@ -64,6 +64,7 @@ NULL
 #' @importFrom sp CRS proj4string Polygons Polygon SpatialPolygons SpatialPoints 
 #'                over coordinates
 #' @importFrom grDevices png
+#' @import rgeos
 #' @seealso fetchR
 #' @export
 fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
