@@ -63,7 +63,6 @@ NULL
 #'         at the coastline, magnitude and direction.
 #' @importFrom sp CRS proj4string Polygons Polygon SpatialPolygons SpatialPoints 
 #'                over coordinates
-#' @import rgeos
 #' @importFrom grDevices png
 #' @seealso fetchR
 #' @export
