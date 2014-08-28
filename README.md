@@ -1,5 +1,7 @@
 # Calculate average fetch for any coastal area around New Zealand
 
+[![Build Status](https://travis-ci.org/blasee/fetchR.svg)](https://travis-ci.org/blasee/fetchR)
+
 This package was designed to provide an objective measurement of fetch for any
 coastal location around New Zealand. Calculating fetch by hand is inaccurate,
 time-consuming and unreliable. The `fetchR` package provides a single function
