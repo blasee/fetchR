@@ -25,7 +25,8 @@
 #' }
 #' 
 #' Locations near the perimiter or outside this bounding box are either not 
-#' coastal or do not (yet?) have the coastal boundaries to calculate the fetch.
+#' coastal or do not (yet?) have the high resolution coastal boundaries to 
+#' calculate the fetch.
 #' 
 #' 
 #' @seealso \code{\link{fetch}}
@@ -51,7 +52,8 @@ NULL
 #' @param max_dist maximum distance (km) allowed for any given angle (default 
 #'                 300).
 #' @param accuracy accuracy (km) of the fetch estimate (default 0.1km).
-#' @param n_angles number of angles for the fetch calculation (equally spaced).
+#' @param degree_int interval of the directions for the fetch calculation in degrees 
+#'                   (equally spaced).
 #' @param quiet \code{FALSE}. Suppress diagnostic messages.
 #' @param plot \code{TRUE}. Create a png in the current working directory.
 #' @param zoom number indicating the zoom for the plot.
@@ -65,7 +67,7 @@ NULL
 #' @importFrom grDevices png
 #' @seealso fetchR
 #' @export
-fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, n_angles = 10, 
+fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
                  plot = TRUE, zoom = max_dist / 10, quiet = FALSE, ...){
   if (!is.numeric(lon) || !is.numeric(lat))
     stop("longitude and latitude must be numeric")
@@ -85,11 +87,11 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, n_angles = 10,
   if (accuracy < .001 || accuracy > max_dist)
     stop(paste("accuracy must be between 0.001 km and", max_dist))
   
-  if (!is.numeric(n_angles) || length(n_angles) != 1)
-    stop("n_angles must be a single number")
+  if (!is.numeric(degree_int) || length(degree_int) != 1)
+    stop("degree_int must be a single number")
   
-  if (n_angles < 4 || n_angles > 100)
-    stop("n_angles must be between 4 and 100")
+  if (degree_int < 4 || degree_int > 100)
+    stop("degree_int must be between 4 and 100")
   
   if (!is.logical(quiet) || length(quiet) != 1)
     stop("quiet must be either TRUE or FALSE")
@@ -112,12 +114,12 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, n_angles = 10,
   max_dist = max_dist * 1000
   accuracy = accuracy * 1000
   outer_radii = seq(accuracy, max_dist, by = accuracy)
-  directions = seq(0, 2 * pi, by = 2 * pi / (360 / n_angles))
+  directions = seq(0, 2 * pi, by = 2 * pi / (360 / degree_int))
   if (tail(directions, 1) == 2 * pi)
     directions = head(directions, -1)
   
   circle_vector = data.frame(direction = directions, magnitude = max_dist)
-  my_circle = vectordestination(c(lon, lat), circle_vector)
+  my_circle = vector_destination(c(lon, lat), circle_vector)
   
   bound_matrix = matrix(c(min(my_circle$lon), min(my_circle$lat),
                           min(my_circle$lon), max(my_circle$lat),
@@ -137,8 +139,10 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, n_angles = 10,
   nz_coast_subset = nz_coast[in_plot_area_coast, ]
   
   if (isTRUE(plot)){
+    if (!isTRUE(quiet))
+      message("initialising plot")
     circle_vector = data.frame(direction = directions, magnitude = max_dist / zoom)
-    my_circle = vectordestination(c(lon, lat), circle_vector)
+    my_circle = vector_destination(c(lon, lat), circle_vector)
     
     png(filename = paste0("Fetch_", paste(coordinates(centre_point), 
                                           collapse = "_"), ".png"), ...)
@@ -160,7 +164,7 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, n_angles = 10,
   for (i in seq_along(outer_radii)){
     circle_vector = data.frame(direction = directions, 
                                magnitude = outer_radii[i])
-    my_circle = vectordestination(c(lon, lat), circle_vector)
+    my_circle = vector_destination(c(lon, lat), circle_vector)
     my_points = SpatialPoints(my_circle, 
                               proj4string = CRS(proj4string(nz_coast)))
     on_land = !is.na(as.character(over(my_points, nz_coast_subset)$name)) |
@@ -189,12 +193,13 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, n_angles = 10,
                                         outer_radii[rep(j, sum(on_land))] / 1000)
       directions = directions[!on_land]
       rows = rows[!on_land]
+      
+      if (length(rows) != 0)
+        if (!isTRUE(quiet))
+          message(length(rows), " more directions to calculate")
     }
     my_previous_circle = my_circle[!on_land, ]
-    percent_done = i / length(outer_radii) * 100
-    if ((percent_done %% 10 == 0) && !isTRUE(quiet))
-      message(paste0(percent_done, "% calculated"))
-    if (length(directions) == 0)
+    if (length(rows) == 0)
       break
   }
   

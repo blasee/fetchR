@@ -32,7 +32,8 @@ Latitude  \tab -47 \tab  -35 \cr
 }
 
 Locations near the perimiter or outside this bounding box are either not
-coastal or do not (yet?) have the coastal boundaries to calculate the fetch.
+coastal or do not (yet?) have the high resolution coastal boundaries to
+calculate the fetch.
 }
 \seealso{
 \code{\link{fetch}}

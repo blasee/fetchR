@@ -3,7 +3,7 @@
 \alias{fetch}
 \title{Calculate Fetch for a (NZ) Coastal Marine Location}
 \usage{
-fetch(lon, lat, max_dist = 300, accuracy = 0.1, n_angles = 10,
+fetch(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
   plot = TRUE, zoom = max_dist/10, quiet = FALSE, ...)
 }
 \arguments{
@@ -16,7 +16,8 @@ fetch(lon, lat, max_dist = 300, accuracy = 0.1, n_angles = 10,
 
 \item{accuracy}{accuracy (km) of the fetch estimate (default 0.1km).}
 
-\item{n_angles}{number of angles for the fetch calculation (equally spaced).}
+\item{degree_int}{interval of the directions for the fetch calculation in degrees
+(equally spaced).}
 
 \item{quiet}{\code{FALSE}. Suppress diagnostic messages.}
 
