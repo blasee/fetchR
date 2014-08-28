@@ -1,5 +1,4 @@
 *.RData
 *.Rhistory
-*.Rproj.user
-*.png
 *.Rproj
+.Rproj.user

@@ -8,6 +8,8 @@ latitude of the location in decimal degrees.
 
 # Installation in R
 
+The installation of `fetchR` requires the `rgeos` package successfully installed.
+
 ```R
 install.packages("devtools")
 library(devtools)
@@ -16,15 +18,27 @@ install_github(username = "blasee", repo = "fetchR")
 
 # Calculate average fetch
 
-To calculate the average fetch for the marine site at latitude = -36.4, 
-longitude = 174.8:
+To calculate the average fetch for the marine site at latitude = -36.4 and 
+longitude = 174.8 (to the nearest 100m):
 
 ```R
 library(fetchR)
 fetch(174.8, -36.4)
 
-# average fetch = 43.6 km
+# average fetch:           6.531 km
+# median fetch:            3.05 km
+# most exposed directions: 70
 
 ?fetchR
 ?fetch
 ```
+A png of the map and vectors used in calculating the fetch is saved to the 
+working directory. The `zoom` argument can be used to produce various figures.
+Below are two examples of figures produced from the marine site stated above 
+with default `zoom` and `zoom = 15`.
+
+![default zoom][default_zoom]
+![zoom 15][less_zoom]
+
+[default_zoom]: figures/default_zoom.png
+[less_zoom]: figures/less_zoom.png
