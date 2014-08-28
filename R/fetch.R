@@ -63,8 +63,8 @@ NULL
 #'         at the coastline, magnitude and direction.
 #' @importFrom sp CRS proj4string Polygons Polygon SpatialPolygons SpatialPoints 
 #'                over coordinates
-#' @import rgeos
 #' @importFrom grDevices png
+#' @import rgeos
 #' @seealso fetchR
 #' @export
 fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
@@ -93,10 +93,10 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
   if (degree_int < 4 || degree_int > 100)
     stop("degree_int must be between 4 and 100")
   
-  if (!is.logical(quiet) || length(quiet) != 1)
+  if (!is.logical(quiet) || length(quiet) != 1 || anyNA(quiet))
     stop("quiet must be either TRUE or FALSE")
   
-  if (!is.logical(plot) || length(plot) != 1)
+  if (!is.logical(plot) || length(plot) != 1 || anyNA(plot))
     stop("plot must be either TRUE or FALSE")
   
   if (!is.numeric(zoom) || length(zoom) != 1)
@@ -107,8 +107,8 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
   if (!quiet)
     message("checking coordinate is not on land")
   
-  if (any(!is.na(over(nz_coast, centre_point))) || 
-        any(!is.na(over(nz_islands, centre_point))))
+  if (!anyNA(over(nz_coast, centre_point)) ||
+      !anyNA(over(nz_islands, centre_point)))
     stop("coordinate is on land")
   
   max_dist = max_dist * 1000
@@ -121,11 +121,15 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
   circle_vector = data.frame(direction = directions, magnitude = max_dist)
   my_circle = vector_destination(c(lon, lat), circle_vector)
   
-  bound_matrix = matrix(c(min(my_circle$lon), min(my_circle$lat),
-                          min(my_circle$lon), max(my_circle$lat),
-                          max(my_circle$lon), max(my_circle$lat),
-                          max(my_circle$lon), min(my_circle$lat),
-                          min(my_circle$lon), min(my_circle$lat)),
+  circle_lon_min = min(my_circle$lon)
+  circle_lon_max = max(my_circle$lon)
+  circle_lat_min = min(my_circle$lat)
+  circle_lat_max = max(my_circle$lat)
+  bound_matrix = matrix(c(circle_lon_min, circle_lat_min,
+                          circle_lon_min, circle_lat_max,
+                          circle_lon_max, circle_lat_max,
+                          circle_lon_max, circle_lat_min,
+                          circle_lon_min, circle_lat_min),
                         ncol = 2, byrow = TRUE)
   bound_poly_p = Polygon(bound_matrix)
   bound_poly_ps = Polygons(list(bound_poly_p), 1)
@@ -138,8 +142,8 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
   in_plot_area_coast = which(!is.na(over(nz_coast, bound_poly_sps)))
   nz_coast_subset = nz_coast[in_plot_area_coast, ]
   
-  if (isTRUE(plot)){
-    if (!isTRUE(quiet))
+  if (plot){
+    if (!quiet)
       message("initialising plot")
     circle_vector = data.frame(direction = directions, magnitude = max_dist / zoom)
     my_circle = vector_destination(c(lon, lat), circle_vector)
@@ -147,6 +151,7 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
     png(filename = paste0("Fetch_", paste(coordinates(centre_point), 
                                           collapse = "_"), ".png"), ...)
     on.exit(dev.off())
+    dev.hold()
     plot(my_circle, type = 'n')
     plot(nz_coast_subset, add = TRUE, col = "lightgrey")
     plot(nz_islands_subset, add = TRUE, col = "lightgrey")
@@ -156,10 +161,11 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
   if (!quiet)
     message("calculating fetch")
   
-  end_points = data.frame(longitude = numeric(length(directions)),
-                          latitude = numeric(length(directions)),
-                          direction = numeric(length(directions)),
-                          distance = numeric(length(directions)))
+  initial_vector = numeric(length(directions))
+  end_points = data.frame(longitude = initial_vector,
+                          latitude = initial_vector,
+                          direction = initial_vector,
+                          distance = initial_vector)
   rows = rownames(end_points)
   for (i in seq_along(outer_radii)){
     circle_vector = data.frame(direction = directions, 
@@ -167,7 +173,8 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
     my_circle = vector_destination(c(lon, lat), circle_vector)
     my_points = SpatialPoints(my_circle, 
                               proj4string = CRS(proj4string(nz_coast)))
-    on_land = !is.na(as.character(over(my_points, nz_coast_subset)$name)) |
+    on_land =
+      !is.na(as.character(over(my_points, nz_coast_subset)$name)) |
       !is.na(as.character(over(my_points, nz_islands_subset)$name))
     
     if (any(on_land) || i == length(outer_radii)){
@@ -194,24 +201,24 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
       directions = directions[!on_land]
       rows = rows[!on_land]
       
-      if (length(rows) != 0)
-        if (!isTRUE(quiet))
-          message(length(rows), " more directions to calculate")
+      if (length(rows) && !quiet)
+        message(length(rows), " more directions to calculate")
     }
     my_previous_circle = my_circle[!on_land, ]
-    if (length(rows) == 0)
+    if (!length(rows))
       break
   }
   
-  if (isTRUE(plot)){
-    if (!isTRUE(quiet))
+  if (plot){
+    if (!quiet)
       message("preparing plot")
     lons = c(t(data.frame(coordinates(centre_point)[1],
                           end_points[, 1])))
     lats = c(t(data.frame(coordinates(centre_point)[2],
                           end_points[, 2])))
     lines(x = lons, y = lats, col = 'red')
-    if (!isTRUE(quiet))
+    dev.flush()
+    if (!quiet)
       message("plot saved in ", normalizePath("."))
   }
   message("average fetch = ", mean(end_points$distance), " km")

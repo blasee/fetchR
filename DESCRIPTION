@@ -14,4 +14,4 @@ Description: fetchR is an R package for calculating fetch (exposure). The
     current convention for calculating fetch is to sum the distances from the
     location to the shoreline (up to a maximum distance) for every 10 degrees
     on the compass rose. This is the implementation fetchR currently supports.
-License: GPL-2
+License: GPL-2 | file LICENSE
