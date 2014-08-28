@@ -10,8 +10,6 @@ latitude of the location in decimal degrees.
 
 # Installation in R
 
-The installation of `fetchR` requires the `rgeos` package successfully installed.
-
 ```R
 install.packages("devtools")
 library(devtools)
