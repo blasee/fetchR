@@ -21,7 +21,7 @@
 #'         at the coastline, magnitude and direction.
 #' @importFrom sp CRS proj4string Polygons Polygon SpatialPolygons SpatialPoints 
 #'                over coordinates
-#' @importFrom grDevices png
+#' @importFrom graphics plot
 #' @import rgeos
 #' @seealso \code{\link{fetchR}}
 #' @export

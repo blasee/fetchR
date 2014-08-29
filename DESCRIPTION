@@ -8,6 +8,7 @@ Authors@R: person("Blake", "Seers", role = c("aut", "cre"),
 Imports:
     sp,
     methods,
+    graphics,
     rgeos
 Suggests:
     knitr
