@@ -7,6 +7,7 @@ Authors@R: person("Blake", "Seers", role = c("aut", "cre"),
     email = "blake.seers@gmail.com")
 Imports:
     sp,
+    methods,
     rgeos
 Suggests:
     knitr
