@@ -6,7 +6,7 @@
 \title{Calculate Fetch for a (NZ) Coastal Marine Location}
 \usage{
 fetch(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
-  plot = TRUE, zoom = max_dist/10, quiet = FALSE, ...)
+  quiet = FALSE)
 }
 \arguments{
 \item{lon}{longitude in decimal degrees.}
@@ -22,12 +22,6 @@ fetch(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
 (equally spaced).}
 
 \item{quiet}{\code{FALSE}. Suppress diagnostic messages.}
-
-\item{plot}{\code{TRUE}. Create a png in the current working directory.}
-
-\item{zoom}{number indicating the zoom for the plot.}
-
-\item{...}{further arguments passed to \code{\link[grDevices]{png}}}
 }
 \value{
 returns an invisible dataframe containing the resultant coordinates
@@ -40,10 +34,9 @@ computationally expensive, especially for exposed sites. The number of angles
 can be between 4 and 100, however large values can be very computationally
 expensive and may not improve the accuracy of the estimate too much. When
 land is hit, the distance to coast from the previous iteration is used i.e.
-the points will always end up in the water. The zoom is only used for when
-\code{plot} is \code{TRUE} --- the higher the value, the higher the zoom.
+the points will always end up in the water.
 }
 \seealso{
-fetchR
+\code{\link{fetchR}}
 }
 

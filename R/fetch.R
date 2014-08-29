@@ -6,8 +6,7 @@
 #' can be between 4 and 100, however large values can be very computationally 
 #' expensive and may not improve the accuracy of the estimate too much. When 
 #' land is hit, the distance to coast from the previous iteration is used i.e. 
-#' the points will always end up in the water. The zoom is only used for when
-#' \code{plot} is \code{TRUE} --- the higher the value, the higher the zoom.
+#' the points will always end up in the water.
 #' 
 #' @param lon longitude in decimal degrees.
 #' @param lat latitude in decimal degrees.
@@ -17,9 +16,6 @@
 #' @param degree_int interval of the directions for the fetch calculation in degrees 
 #'                   (equally spaced).
 #' @param quiet \code{FALSE}. Suppress diagnostic messages.
-#' @param plot \code{TRUE}. Create a png in the current working directory.
-#' @param zoom number indicating the zoom for the plot.
-#' @param ... further arguments passed to \code{\link[grDevices]{png}}
 #' 
 #' @return returns an invisible dataframe containing the resultant coordinates 
 #'         at the coastline, magnitude and direction.
@@ -27,10 +23,10 @@
 #'                over coordinates
 #' @importFrom grDevices png
 #' @import rgeos
-#' @seealso fetchR
+#' @seealso \code{\link{fetchR}}
 #' @export
 fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
-                 plot = TRUE, zoom = max_dist / 10, quiet = FALSE, ...){
+                 quiet = FALSE){
   if (!is.numeric(lon) || !is.numeric(lat))
     stop("longitude and latitude must be numeric")
   
@@ -57,13 +53,7 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
   
   if (!is.logical(quiet) || length(quiet) != 1 || anyNA(quiet))
     stop("quiet must be either TRUE or FALSE")
-  
-  if (!is.logical(plot) || length(plot) != 1 || anyNA(plot))
-    stop("plot must be either TRUE or FALSE")
-  
-  if (!is.numeric(zoom) || length(zoom) != 1)
-    stop("zoom must be a single number")
-  
+    
   centre_point = SpatialPoints(data.frame(lon, lat), 
                                proj4string = CRS(proj4string(nz_coast)))
   if (!quiet)
@@ -99,10 +89,10 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
                                    proj4string = CRS(proj4string(nz_coast)))
   
   
-  in_plot_area_islands = which(!is.na(over(nz_islands, bound_poly_sps)))
-  nz_islands_subset = nz_islands[in_plot_area_islands, ]
-  in_plot_area_coast = which(!is.na(over(nz_coast, bound_poly_sps)))
-  nz_coast_subset = nz_coast[in_plot_area_coast, ]
+  in_radius_islands = which(!is.na(over(nz_islands, bound_poly_sps)))
+  nz_islands_subset = nz_islands[in_radius_islands, ]
+  in_radius_coast = which(!is.na(over(nz_coast, bound_poly_sps)))
+  nz_coast_subset = nz_coast[in_radius_coast, ]
   
   if (!quiet)
     message("calculating fetch")
@@ -155,5 +145,10 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
       break
   }
   
-  new("fetch", end_points)
+  new("fetch", 
+      location_lat = lat, 
+      location_long = lon,
+      subset_coast = nz_coast_subset, 
+      subset_island = nz_islands_subset,
+      end_points)
 }
