@@ -6,8 +6,8 @@ Date: 2014-08-27
 Authors@R: person("Blake", "Seers", role = c("aut", "cre"),
     email = "blake.seers@gmail.com")
 Imports:
-    sp
-rgeos
+    sp,
+    rgeos
 Suggests:
     knitr
 URL: http://en.wikipedia.org/wiki/Fetch_(geography)
