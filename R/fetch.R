@@ -1,41 +1,3 @@
-#' Calculate Fetch with \pkg{fetchR}
-#' 
-#' The \pkg{fetchR} package provides an objective calculation of fetch 
-#' based on current conventional standards.
-#' 
-#' Fetch is an important measurement in coastal applications effectively 
-#' providing a proportional measurement of the length of water wind is blown 
-#' over. The higher the fetch the more energy is imparted to the surface of the 
-#' water resulting in a larger sea state
-#' (\url{http://en.wikipedia.org/wiki/Fetch_(geography)}).
-#' 
-#' Fetch is currently calculated as the sum of distances from the marine 
-#' location to the shoreline for every 10 degrees (default) of the compass rose. 
-#' The only function required for the calculation of fetch at given latitude and
-#' longitude coordinates is \code{\link{fetch}}.
-#' 
-#' @note The \pkg{fetchR} package is intended for New Zealand coastal
-#' applications and only supports marine sites within the following bounding 
-#' box:
-#' 
-#' \tabular{lll}{
-#'  \tab Min \tab Max \cr
-#' Longitude \tab 167 \tab  178 \cr
-#' Latitude  \tab -47 \tab  -35 \cr
-#' }
-#' 
-#' Locations near the perimiter or outside this bounding box are either not 
-#' coastal or do not (yet?) have the high resolution coastal boundaries to 
-#' calculate the fetch.
-#' 
-#' 
-#' @seealso \code{\link{fetch}}
-#' @name fetchR
-#' @aliases fetchR-package
-#' @docType package
-#' @keywords package
-NULL
-
 #' Calculate Fetch for a (NZ) Coastal Marine Location
 #' 
 #' Calculate average fetch for a New Zealand coastal location given in decimal 
@@ -108,7 +70,7 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
     message("checking coordinate is not on land")
   
   if (!anyNA(over(nz_coast, centre_point)) ||
-      !anyNA(over(nz_islands, centre_point)))
+        !anyNA(over(nz_islands, centre_point)))
     stop("coordinate is on land")
   
   max_dist = max_dist * 1000
@@ -141,22 +103,6 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
   nz_islands_subset = nz_islands[in_plot_area_islands, ]
   in_plot_area_coast = which(!is.na(over(nz_coast, bound_poly_sps)))
   nz_coast_subset = nz_coast[in_plot_area_coast, ]
-  
-  if (plot){
-    if (!quiet)
-      message("initialising plot")
-    circle_vector = data.frame(direction = directions, magnitude = max_dist / zoom)
-    my_circle = vector_destination(c(lon, lat), circle_vector)
-    
-    png(filename = paste0("Fetch_", paste(coordinates(centre_point), 
-                                          collapse = "_"), ".png"), ...)
-    on.exit(dev.off())
-    dev.hold()
-    plot(my_circle, type = 'n')
-    plot(nz_coast_subset, add = TRUE, col = "lightgrey")
-    plot(nz_islands_subset, add = TRUE, col = "lightgrey")
-    points(centre_point)
-  }
   
   if (!quiet)
     message("calculating fetch")
@@ -209,25 +155,5 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
       break
   }
   
-  if (plot){
-    if (!quiet)
-      message("preparing plot")
-    lons = c(t(data.frame(coordinates(centre_point)[1],
-                          end_points[, 1])))
-    lats = c(t(data.frame(coordinates(centre_point)[2],
-                          end_points[, 2])))
-    lines(x = lons, y = lats, col = 'red')
-    dev.flush()
-    if (!quiet)
-      message("plot saved in ", normalizePath("."))
-  }
-  message("average fetch = ", mean(end_points$distance), " km")
-  message("median fetch = ", median(end_points$distance), " km")
-  which_max = which(end_points$distance == max(end_points$distance))
-  message("most exposed directions: ", paste(end_points$direction[which_max],
-                                             collapse = ", "))
-  invisible(end_points)
+  new("fetch", end_points)
 }
-
-load(system.file("extdata", "nz_coast.rda", package = "fetchR"))
-load(system.file("extdata", "nz_islands.rda", package = "fetchR"))

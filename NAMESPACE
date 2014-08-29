@@ -3,6 +3,7 @@
 export(fetch)
 import(rgeos)
 importFrom(grDevices,png)
+importFrom(methods,setClass)
 importFrom(sp,CRS)
 importFrom(sp,Polygon)
 importFrom(sp,Polygons)
