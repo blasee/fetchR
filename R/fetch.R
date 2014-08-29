@@ -51,7 +51,7 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
   if (degree_int < 4 || degree_int > 100)
     stop("degree_int must be between 4 and 100")
   
-  if (!is.logical(quiet) || length(quiet) != 1 || anyNA(quiet))
+  if (!is.logical(quiet) || length(quiet) != 1 || is.na(quiet))
     stop("quiet must be either TRUE or FALSE")
     
   centre_point = SpatialPoints(data.frame(lon, lat), 
@@ -59,8 +59,8 @@ fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
   if (!quiet)
     message("checking coordinate is not on land")
   
-  if (!anyNA(over(nz_coast, centre_point)) ||
-        !anyNA(over(nz_islands, centre_point)))
+  if (!is.na(over(nz_coast, centre_point)) ||
+        !is.na(over(nz_islands, centre_point)))
     stop("coordinate is on land")
   
   max_dist = max_dist * 1000
