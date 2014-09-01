@@ -65,7 +65,7 @@ setMethod("summary", "fetch", function(object){
 #' @importFrom methods setMethod
 #' @export
 setMethod("show", "fetch", function(object){
-  print(object[, 3:4])
+  print(object)
 })
 
 #' @importFrom methods setMethod
