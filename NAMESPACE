@@ -7,13 +7,9 @@ exportMethods(show)
 exportMethods(summary)
 import(rgeos)
 importClassesFrom(sp,SpatialPolygonsDataFrame)
-<<<<<<< HEAD
 importFrom(XML,newXMLDoc)
 importFrom(XML,newXMLNode)
 importFrom(XML,saveXML)
-importFrom(grDevices,png)
-=======
->>>>>>> 6920a6c6fb1367be382889c62fd5c2cc6d3f428b
 importFrom(methods,setClass)
 importFrom(methods,setGeneric)
 importFrom(methods,setMethod)
