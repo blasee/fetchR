@@ -37,7 +37,7 @@
 #' plot(kawau_bay)
 #' 
 #' # Output the file as a KML for further investigation in Google Earth
-#' save_kml(kawau_bay)
+#' save_kml(kawau_bay, "kawau_bay")
 #' @export
 fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
                  quiet = FALSE){
