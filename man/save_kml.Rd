@@ -2,10 +2,17 @@
 \docType{methods}
 \name{save_kml}
 \alias{save_kml}
-\alias{save_kml,fetch,ANY-method}
 \title{Save a KML file of the direction vectors}
 \usage{
+save_kml(object, file_name)
+
 \S4method{save_kml}{fetch}(object, file_name)
+}
+\arguments{
+\item{object}{a \code{fetch} object}
+
+\item{file_name}{character string giving the KML file name. The \code{.kml}
+                 suffix is not required.}
 }
 \description{
 The \code{save_kml} function saves a KML file for use in Google Earth or

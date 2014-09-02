@@ -38,8 +38,14 @@ load(system.file("extdata", "nz_islands.rda", package = "fetchR"))
 #' @keywords package
 NULL
 
-#' @rdname fetch
-#' @aliases fetch
+#' Fetch Class
+#' 
+#' @slot location_lat latitude of the location of interest.
+#' @slot location_lon longitude of the location of interest.
+#' @slot subset_coast a subset of the NZ coast shapefile to increase efficiency.
+#' @slot subset_island a subset of the NZ offshore islands shapefile to increase
+#'                     efficiency.
+#' 
 #' @importFrom methods setClass
 #' @importClassesFrom sp SpatialPolygonsDataFrame
 setClass("fetch", 
