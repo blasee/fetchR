@@ -109,6 +109,8 @@ setMethod("plot", c("fetch", "missing"), function(x, y, ...){
   invisible(dev.flush())
 })
 
+#' @aliases save_kml
+#' @rdname save_kml
 #' @importFrom methods setGeneric
 setGeneric("save_kml", function(object, file_name) {
   standardGeneric("save_kml")
@@ -123,10 +125,14 @@ setGeneric("save_kml", function(object, file_name) {
 #' subtidal reefs or other potentially fetch-limiting structures that aren't 
 #' defined in the original shape file.
 #' 
+#' @param object a \code{fetch} object
+#' @param file_name character string giving the KML file name. The \code{.kml}
+#'                  suffix is not required.
+#' 
 #' @importFrom methods setMethod
 #' @importFrom XML newXMLDoc newXMLNode saveXML
-#' @aliases save_kml,fetch,ANY-method
 #' @rdname save_kml
+#' @aliases save_kml
 #' @name save_kml
 #' @export
 setMethod(
