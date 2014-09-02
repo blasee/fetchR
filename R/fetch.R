@@ -24,6 +24,21 @@
 #' @importFrom grDevices png
 #' @import rgeos
 #' @seealso \code{\link{fetchR}}
+#' @examples
+#' # Calculate fetch for Kawau Bay
+#' kawau_bay = fetch(174.8, -36.4)
+#' 
+#' # Show the distances for each direction and the resultant locations
+#' kawau_bay
+#' 
+#' # Summarise the information
+#' summary(kawau_bay)
+#' 
+#' # Plot the vectors
+#' plot(kawau_bay)
+#' 
+#' # Output the file as a KML for further investigation in Google Earth
+#' save_kml(kawau_bay)
 #' @export
 fetch = function(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
                  quiet = FALSE){

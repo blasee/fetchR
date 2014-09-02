@@ -3,10 +3,13 @@
 \name{fetch}
 \alias{fetch}
 \alias{fetch-class}
+\alias{show,fetch-method}
 \title{Calculate Fetch for a (NZ) Coastal Marine Location}
 \usage{
 fetch(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
   quiet = FALSE)
+
+\S4method{show}{fetch}(object)
 }
 \arguments{
 \item{lon}{longitude in decimal degrees.}
@@ -22,6 +25,8 @@ fetch(lon, lat, max_dist = 300, accuracy = 0.1, degree_int = 10,
 (equally spaced).}
 
 \item{quiet}{\code{FALSE}. Suppress diagnostic messages.}
+
+\item{object}{Any R object}
 }
 \value{
 returns an invisible dataframe containing the resultant coordinates
@@ -35,6 +40,22 @@ can be between 4 and 100, however large values can be very computationally
 expensive and may not improve the accuracy of the estimate too much. When
 land is hit, the distance to coast from the previous iteration is used i.e.
 the points will always end up in the water.
+}
+\examples{
+# Calculate fetch for Kawau Bay
+kawau_bay = fetch(174.8, -36.4)
+
+# Show the distances for each direction and the resultant locations
+kawau_bay
+
+# Summarise the information
+summary(kawau_bay)
+
+# Plot the vectors
+plot(kawau_bay)
+
+# Output the file as a KML for further investigation in Google Earth
+save_kml(kawau_bay)
 }
 \seealso{
 \code{\link{fetchR}}

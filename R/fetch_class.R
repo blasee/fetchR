@@ -49,7 +49,17 @@ setClass("fetch",
                    subset_island = "SpatialPolygonsDataFrame"),
          contains = "data.frame")
 
+#' Summarise a Fetch Object
+#' 
+#' The \code{summary} function calculates the mean and median fetch and the most 
+#' exposed direction(s).
+#' 
+#' @param object \code{fetch} object as returned by \code{\link{fetch}}.
+#' 
 #' @importFrom methods setMethod
+#' @aliases summary,fetch-method
+#' @rdname summary
+#' @name summary
 #' @export
 setMethod("summary", "fetch", function(object){
   which_max = which(object$distance == max(object$distance))
@@ -62,13 +72,28 @@ setMethod("summary", "fetch", function(object){
     "\n", sep = "")
 })
 
+#' @aliases fetch
+#' @rdname fetch
 #' @importFrom methods setMethod
 #' @export
 setMethod("show", "fetch", function(object){
   print(object)
 })
 
+#' Plot a Fetch Object
+#' 
+#' This is the default plot method for a \code{\link{fetch}} object. A map is
+#' plotted with the area determined by the length of the direction vectors. The 
+#' vectors are plotted as lines originating from the location's coordinates.
+#' 
+#' @param x \code{fetch} object as returned by \code{\link{fetch}}.
+#' @param y missing (not used).
+#' @param ... further arguments passed to \code{\link{segments}}
+#' 
 #' @importFrom methods setMethod
+#' @aliases plot,fetch,missing-method
+#' @rdname plot
+#' @name plot
 #' @export
 setMethod("plot", c("fetch", "missing"), function(x, y, ...){
   x0 = x@location_long
@@ -83,3 +108,95 @@ setMethod("plot", c("fetch", "missing"), function(x, y, ...){
   segments(x0, y0, x1, y1, ...)
   invisible(dev.flush())
 })
+
+#' @importFrom methods setGeneric
+setGeneric("save_kml", function(object, file_name) {
+  standardGeneric("save_kml")
+})
+
+#' Save a KML file of the direction vectors
+#' 
+#' The \code{save_kml} function saves a KML file for use in Google Earth or 
+#' other KML-friendly software.
+#' 
+#' This function is useful for checking that no vectors pass through any 
+#' subtidal reefs or other potentially fetch-limiting structures that aren't 
+#' defined in the original shape file.
+#' 
+#' @importFrom methods setMethod
+#' @importFrom XML newXMLDoc newXMLNode saveXML
+#' @aliases save_kml,fetch,ANY-method
+#' @rdname save_kml
+#' @name save_kml
+#' @export
+setMethod(
+  "save_kml", 
+  signature(object = "fetch", file_name = "ANY"), 
+  function(object, file_name){
+    if (missing(file_name))
+      stop("file_name must be supplied")
+    if (!is.character(file_name))
+      stop("file_name must be a character string")
+    file_name = file_name[1]
+    doc = newXMLDoc()
+    kml.node = 
+      newXMLNode("kml", 
+                 doc = doc, 
+                 namespaceDefinitions = 
+                   c("http://www.opengis.net/kml/2.2", 
+                     gx = "http://www.google.com/kml/ext/2.2", 
+                     kml = "http://www.opengis.net/kml/2.2", 
+                     atom = "http://www.w3.org/2005/Atom"))
+    Document.node = newXMLNode("Document", 
+                               parent = kml.node)
+    newXMLNode("name", strsplit(file_name, ".kml")[[1]],
+               parent = Document.node)
+    newXMLNode("StyleMap", attrs = c(id = "mouseover"),
+               parent = Document.node,
+               newXMLNode("Pair",
+                          newXMLNode("key", "normal"),
+                          newXMLNode("styleUrl", "#normal")),
+               newXMLNode("Pair",
+                          newXMLNode("key", "highlight"),
+                          newXMLNode("styleUrl", "#highlight")))
+    newXMLNode("Style", attrs = c(id = "highlight"),
+               parent = Document.node,
+               newXMLNode("LineStyle",
+                          newXMLNode("color", "FF1400FF"),
+                          newXMLNode("width", "3")))
+    newXMLNode("Style", attrs = c(id = "normal"),
+               parent = Document.node,
+               newXMLNode("LineStyle",
+                          newXMLNode("color", "50146AFF"),
+                          newXMLNode("width", "2")))
+    
+    
+    fetch_folder = newXMLNode("Folder", 
+                              parent = Document.node,
+                              newXMLNode("name", "Fetch"),
+                              newXMLNode("open", "1"))
+    for (i in seq_along(object$distance))
+      newXMLNode("Placemark",
+                 newXMLNode("name", paste(object$direction[i], "degrees")),
+                 newXMLNode("description", paste(object$distance[i], "km")),
+                 newXMLNode("styleUrl", "#mouseover"),
+                 newXMLNode("LineString",
+                            newXMLNode("tessellate", "1"),
+                            newXMLNode("coordinates", 
+                                       paste0(object@location_long, ",",
+                                             object@location_lat, ",",
+                                             "0", " ",
+                                             object$longitude[i], ",",
+                                             object$latitude[i], ",",
+                                             "0"))), 
+                 parent = fetch_folder)
+    
+    if (grepl("\\.kml$", file_name))
+      xml_file = file_name
+    else
+      xml_file = paste0(file_name, ".kml")
+    
+    saveXML(doc, file = xml_file)
+    message(paste("output KML file:", xml_file))
+  }
+)
