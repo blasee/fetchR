@@ -12,7 +12,8 @@ latitude of the location in decimal degrees.
 
 The installation of `fetchR` requires the `rgeos` package successfully installed.
 
-```R
+
+```r
 install.packages("devtools")
 library(devtools)
 install_github(username = "blasee", repo = "fetchR")
@@ -23,24 +24,80 @@ install_github(username = "blasee", repo = "fetchR")
 To calculate the average fetch for the marine site at latitude = -36.4 and 
 longitude = 174.8 (to the nearest 100m):
 
-```R
+
+```r
 library(fetchR)
-fetch(174.8, -36.4)
-
-# average fetch:           6.531 km
-# median fetch:            3.05 km
-# most exposed directions: 70
-
-?fetchR
-?fetch
+kawau_bay = fetch(174.8, -36.4)
 ```
-A png of the map and vectors used in calculating the fetch is saved to the 
-working directory. The `zoom` argument can be used to produce various figures.
-Below are two examples of figures produced from the marine site stated above 
-with default `zoom` and `zoom = 15`.
 
-![default zoom][default_zoom]
-![zoom 15][less_zoom]
+```
+## checking coordinate is not on land
+## calculating fetch
+## 35 more directions to calculate
+## 34 more directions to calculate
+## 33 more directions to calculate
+## 31 more directions to calculate
+## 29 more directions to calculate
+## 27 more directions to calculate
+## 24 more directions to calculate
+## 23 more directions to calculate
+## 21 more directions to calculate
+## 19 more directions to calculate
+## 18 more directions to calculate
+## 17 more directions to calculate
+## 16 more directions to calculate
+## 15 more directions to calculate
+## 14 more directions to calculate
+## 13 more directions to calculate
+## 12 more directions to calculate
+## 11 more directions to calculate
+## 10 more directions to calculate
+## 9 more directions to calculate
+## 8 more directions to calculate
+## 6 more directions to calculate
+## 5 more directions to calculate
+## 4 more directions to calculate
+## 3 more directions to calculate
+## 2 more directions to calculate
+## 1 more directions to calculate
+```
 
-[default_zoom]: figures/default_zoom.png
-[less_zoom]: figures/less_zoom.png
+```r
+# Contains the distances for each direction
+head(kawau_bay)
+```
+
+```
+##   longitude latitude direction distance
+## 1     174.8   -36.38         0      2.1
+## 2     174.8   -36.38        10      2.0
+## 3     174.8   -36.38        20      2.5
+## 4     174.8   -36.38        30      2.6
+## 5     174.8   -36.38        40      3.3
+## 6     174.8   -36.38        50      3.8
+```
+
+```r
+summary(kawau_bay)
+```
+
+```
+## Latitude: -36.4
+## Longitude: 174.8
+## Average fetch:	6.531
+## Median fetch:	3.05
+## Exposed directions:	70
+```
+
+```r
+plot(kawau_bay, lty = 3, col = "red")
+```
+
+```
+## initializing plot...
+```
+
+![default fetch plot](./figures/fetch_plot.png) 
+
+Further enhanced visualisation methods including ggmap and output to KML files 
+are coming soon.
