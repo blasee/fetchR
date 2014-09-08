@@ -77,6 +77,9 @@ head(kawau_bay)
 ## 6     174.8   -36.38        50      3.8
 ```
 
+The summary function gives the location coordinates, average and median fetch
+and the most exposed direction(s).
+
 ```r
 summary(kawau_bay)
 ```
@@ -89,6 +92,9 @@ summary(kawau_bay)
 ## Exposed directions:	70
 ```
 
+# Plotting methods
+Plotting the resulting vectors is easy with the default plot method.
+
 ```r
 plot(kawau_bay, lty = 3, col = "red")
 ```
@@ -97,7 +103,32 @@ plot(kawau_bay, lty = 3, col = "red")
 ## initializing plot...
 ```
 
-![default fetch plot](./figures/fetch_plot.png) 
+![default fetch plot](./figures/fetch_plot.png)
 
-Further enhanced visualisation methods including ggmap and output to KML files 
-are coming soon.
+This plot can be further enhanced with the use of the `ggmap` package for R.
+
+```r
+# install.packages("ggmap")
+library(ggmap)
+
+my_map = ggmap(get_map(c(kawau_bay@location_long, kawau_bay@location_lat), 
+                         maptype = "satellite", zoom = 9))
+
+my_map + geom_segment(data = NULL, aes(x = my_fetch@location_long,
+                                       xend = my_fetch$longitude,
+                                       y = my_fetch@location_lat,
+                                       yend = my_fetch$latitude),
+                      na.rm = TRUE, colour = "white", linetype = 3)
+```
+![ggmap fetch](./figures/ggmap.png)
+
+## Output to KML
+Many GIS applications involve KML files for collaboration, interaction and 
+editing. The vectors in each direction can be exported to KML files via the 
+`save_kml` method.
+
+```r
+save_kml(kawau_bay, "kawau_bay.kml")
+```
+
+![ggmap fetch](./figures/kml.png)
