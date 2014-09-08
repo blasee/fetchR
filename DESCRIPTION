@@ -11,7 +11,8 @@ Imports:
     XML,
     rgeos
 Suggests:
-    knitr
+    knitr,
+    ggmap
 URL: http://en.wikipedia.org/wiki/Fetch_(geography)
 Description: fetchR is an R package for calculating fetch (exposure). The
     current convention for calculating fetch is to sum the distances from the
