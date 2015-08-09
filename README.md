@@ -16,7 +16,7 @@ The installation of `fetchR` requires the `rgeos` package successfully installed
 ```r
 install.packages("devtools")
 library(devtools)
-install_github(username = "blasee", repo = "fetchR")
+install_github("blasee/fetchR")
 ```
 
 # Calculate average fetch
