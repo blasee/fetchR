@@ -90,7 +90,7 @@ Longitude: 174.8
 Average:   4.96km
 Median:    2.86km
 
-Average northerly fetch [315, 45):  2.5km
+Average northerly fetch [315, 45):  2.3km
 Average easterly fetch [45, 135):   6.1km
 Average southerly fetch [135, 225): 6.7km
 Average westerly fetch [225, 315):  4.8km

@@ -79,7 +79,7 @@ setClass("Fetch",
 setMethod("summary", "Fetch", function(object){
   angles = as.numeric(sapply(slot(object, "lines"), slot, "ID"))
   angles_bin = findInterval(angles, seq(45, 315, by = 90))
-  angles[angles_bin == 4] = 0
+  angles_bin[angles_bin == 4] = 0
   cat(
     "Latitude:  ", object@location_lat, "\n",
     "Longitude: ", object@location_long, "\n",

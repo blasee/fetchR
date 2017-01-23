@@ -8,7 +8,7 @@
 \S4method{plot}{Fetch,missing}(x, y, ...)
 }
 \arguments{
-\item{x}{\code{fetch} object as returned by \code{\link{fetch}}.}
+\item{x}{\code{\link{Fetch}} object as returned by \code{\link{fetch}}.}
 
 \item{y}{missing (not used).}
 
