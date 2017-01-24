@@ -5,7 +5,7 @@
 \alias{save_kml}
 \title{Deprecated Functions in \pkg{fetchR}}
 \usage{
-
+save_kml()
 }
 \description{
 \code{save_kml} has been deprecated. Instead use the \code{kml} function in

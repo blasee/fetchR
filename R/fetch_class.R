@@ -97,11 +97,13 @@ setMethod("summary", "Fetch", function(object){
 })
 
 #' @aliases fetch
+#' @aliases show,Fetch-method
 #' @rdname fetch
 #' @param object a \code{\link{Fetch}} object.
 #' @importFrom methods setMethod
 #' @importFrom sp spTransform SpatialLinesLengths
 #' @import rgdal
+#' @importMethodsFrom methods show
 #' @export
 setMethod("show", "Fetch", function(object){
   obj_latlon = spTransform(object, CRS("+proj=longlat +datum=WGS84"))
@@ -117,6 +119,10 @@ setMethod("show", "Fetch", function(object){
   print(ord_df)
 })
 
+#'@importFrom methods setGeneric isGeneric
+if (!isGeneric("plot"))
+  setGeneric("plot", function(x, y, ...) standardGeneric("plot"))
+
 #' Plot a Fetch Object
 #' 
 #' This is the default plot method for a \code{\link{Fetch}} object. The NZ
@@ -128,19 +134,19 @@ setMethod("show", "Fetch", function(object){
 #' @param ... further arguments passed to \code{\link[sp]{plot,SpatialLines,missing-method}}.
 #' 
 #' @importFrom methods setMethod as
-#' @importFrom sp SpatialLines
+#' @importFrom sp SpatialLines plot
 #' @export
-setMethod("plot", c("Fetch", "missing"), function(x, y, ...){
-  plot(as(x, "SpatialLines"), ...)
-  plot(x@subset_map, add = TRUE, col = "lightgrey")
-})
+setMethod("plot", 
+          signature(x = "Fetch", y = "missing"), 
+          definition = function(x, y, ...){
+            plot(as(x, "SpatialLines"), ...)
+            plot(x@subset_map, add = TRUE, col = "lightgrey")
+          })
 
 #' Deprecated Functions in \pkg{fetchR}
 #' 
 #' \code{save_kml} has been deprecated. Instead use the \code{kml} function in
 #' the \pkg{plotKML} package.
-#' 
-#' @usage
 #' 
 #' @examples 
 #' \dontrun{
@@ -162,6 +168,6 @@ setMethod("plot", c("Fetch", "missing"), function(x, y, ...){
 #' @name fetchR-deprecated
 #' @aliases save_kml
 #' @export
-save_kml = function(object, file_name){
+save_kml = function(){
   .Deprecated("kml", "fetchR")
 }

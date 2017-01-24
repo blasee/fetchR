@@ -18,6 +18,8 @@
 #' @return Returns a \code{\link{Fetch}} object.
 #' @importFrom sp SpatialPoints CRS over spTransform coordinates
 #' @importFrom rgeos gBuffer gIntersects gIntersection
+#' @importFrom utils head
+#' @importFrom methods new
 #' @seealso \code{\link{fetchR}}
 #' @examples
 #' # Calculate fetch for Kawau Bay
