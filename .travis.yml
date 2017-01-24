@@ -13,7 +13,7 @@ install:
   
 env:
   global:
-    - R_CHECK_FORCE_SUGGESTS_=FALSE
+    - _R_CHECK_FORCE_SUGGESTS_=FALSE
 
 script:
   - ./travis-tool.sh run_tests
