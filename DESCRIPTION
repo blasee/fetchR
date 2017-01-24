@@ -9,6 +9,7 @@ Imports:
     sp,
     methods,
     rgeos,
+    rgdal,
     stats
 Suggests:
     knitr,
