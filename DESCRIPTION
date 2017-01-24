@@ -21,5 +21,5 @@ Description: fetchR is an R package for calculating fetch (exposure). The
     on the compass rose. These fetch vectors are then used to calculate the average
     fetch (or wind exposure) for the coastal site. The distance and orientation
     calculations are done on the NZ Transverse Mercator 2000 map projection.
-License: NA
+License: GPL-2
 RoxygenNote: 5.0.1
