@@ -101,6 +101,7 @@ setMethod("summary", "Fetch", function(object){
 #' @param object a \code{\link{Fetch}} object.
 #' @importFrom methods setMethod
 #' @importFrom sp spTransform SpatialLinesLengths
+#' @import rgdal
 #' @export
 setMethod("show", "Fetch", function(object){
   obj_latlon = spTransform(object, CRS("+proj=longlat +datum=WGS84"))
