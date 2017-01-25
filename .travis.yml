@@ -9,6 +9,7 @@ env:
     - _R_CHECK_FORCE_SUGGESTS_=FALSE
 
 apt_packages:
+  - libhdf5-serial-dev
   - libgdal-dev
 
 r_packages:
