@@ -8,8 +8,8 @@ env:
   global:
     - _R_CHECK_FORCE_SUGGESTS_=FALSE
 
-before_install:
-  - sudo apt-get install --yes libgeos-dev libgdal-dev libproj-dev
+apt_packages:
+  - libgdal-dev
 
 r_packages:
   - rgdal
