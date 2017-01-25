@@ -8,14 +8,6 @@ env:
   global:
     - _R_CHECK_FORCE_SUGGESTS_=FALSE
 
-apt_packages:
-  - libhdf4-alt-dev
-  - libnetcdf-dev
-  - libgdal1h
-  - libhdf5-7
-  - libhdf5-dev
-  - libgdal-dev
-
 r_packages:
   - rgdal
   - rgeos
