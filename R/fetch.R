@@ -85,7 +85,7 @@ fetch = function(lat, lon, max_dist = 300, n_bearings = 9,
   if (!quiet)
     message("Projecting location onto NZTM 2000 map projection")
   
-  centre_point_proj = rgdal:::spTransform.SpatialLines(centre_point_latlon, CRS("+init=epsg:2193"))
+  centre_point_proj = spTransform(centre_point_latlon, CRS("+init=epsg:2193"))
   
   if (!quiet)
     message("Checking coordinate is not on land")

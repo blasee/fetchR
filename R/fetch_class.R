@@ -106,7 +106,7 @@ setMethod("summary", "Fetch", function(object){
 #' @importMethodsFrom methods show
 #' @export
 setMethod("show", "Fetch", function(object){
-  obj_latlon = rgdal:::spTransform.SpatialLines(object, CRS("+proj=longlat +datum=WGS84"))
+  obj_latlon = spTransform(object, CRS("+proj=longlat +datum=WGS84"))
   lat_lon_mat = t(sapply(sapply(slot(obj_latlon, "lines"), slot, "Lines"), 
                          slot, "coords"))[, c(4, 2)]
   unord_df = data.frame(latitude = lat_lon_mat[, 1],
