@@ -96,27 +96,32 @@ setMethod("summary", "Fetch", function(object){
     "n_bearings = ", table(angles_bin)[[1]], "\n", sep = "")
 })
 
-#' @aliases fetch
-#' @aliases show,Fetch-method
-#' @rdname fetch
-#' @param object a \code{\link{Fetch}} object.
-#' @importFrom methods setMethod
-#' @importFrom sp SpatialLinesLengths spTransform
 #' @import rgdal
-#' @importMethodsFrom methods show
-#' @export
-setMethod("show", "Fetch", function(object){
-  obj_latlon = spTransform(object, CRS("+proj=longlat +datum=WGS84"))
+#' @importFrom methods setAs slot
+#' @importFrom sp SpatialLinesLengths spTransform
+setAs("Fetch", "data.frame", function(from){
+  obj_latlon = spTransform(from, CRS("+proj=longlat +datum=WGS84"))
   lat_lon_mat = t(sapply(sapply(slot(obj_latlon, "lines"), slot, "Lines"), 
                          slot, "coords"))[, c(4, 2)]
   unord_df = data.frame(latitude = lat_lon_mat[, 1],
                         longitude = lat_lon_mat[, 2],
                         direction = as.numeric(
-                          sapply(slot(object, "lines"), slot, "ID")),
-                        fetch = round(SpatialLinesLengths(object) / 1000, 2))
+                          sapply(slot(from, "lines"), slot, "ID")),
+                        fetch = round(SpatialLinesLengths(from) / 1000, 2))
   ord_df = unord_df[order(unord_df$direction), ]
   rownames(ord_df) = NULL
-  print(ord_df)
+  ord_df
+})
+
+#' @aliases fetch
+#' @aliases show,Fetch-method
+#' @rdname fetch
+#' @param object a \code{\link{Fetch}} object.
+#' @importFrom methods setMethod
+#' @importMethodsFrom methods show
+#' @export
+setMethod("show", "Fetch", function(object){
+  print(as(object, "data.frame"))
 })
 
 #'@importFrom methods setGeneric isGeneric
