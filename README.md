@@ -4,17 +4,17 @@
 
 This package was designed to provide an objective measurement of fetch for any
 coastal location around New Zealand. Calculating fetch by hand is inaccurate,
-time-consuming and unreliable. The `fetchR` package provides a single function
+time-consuming and unreliable. The **fetchR** package provides a single function
 to calculate the average fetch, all that is required is the latitude and 
 longitude of the location in decimal degrees.
 
 # Web application
 
-Check out the online application for `fetchR` at https://blasee.shinyapps.io/fetchR_shiny/!
+Check out the online application for **fetchR** at https://blasee.shinyapps.io/fetchR_shiny/!
 
 # Local installation
 
-The installation of `fetchR` requires the `rgeos` package successfully installed.
+The installation of **fetchR** requires the `rgeos` package successfully installed.
 
 ## From R
 
@@ -30,7 +30,7 @@ install_github("blasee/fetchR")
 # Calculate average fetch
 
 To calculate the average fetch for the marine site at latitude = -36.4 and 
-longitude = 174.8 (to the nearest 100m):
+longitude = 174.8:
 
 
 ```r
@@ -45,8 +45,8 @@ kawau_bay = fetch(-36.4, 174.8)
 ```
 
 ```r
-# Contains the distances for each direction
-head(kawau_bay)
+# Contains the distances for each direction (the first 6 rows are shown below)
+kawau_bay
 ```
 
 ```
@@ -57,6 +57,7 @@ head(kawau_bay)
 4 -36.41251  174.8280       120  2.87
 5 -36.41348  174.8206       130  2.38
 6 -36.41755  174.8189       140  2.58
+...
 ```
 
 The summary function gives the location coordinates, average and median fetch
