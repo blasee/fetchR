@@ -8,7 +8,11 @@ time-consuming and unreliable. The `fetchR` package provides a single function
 to calculate the average fetch, all that is required is the latitude and 
 longitude of the location in decimal degrees.
 
-# Installation
+# Web application
+
+Check out the online application for `fetchR` at https://blasee.shinyapps.io/fetchR_shiny/!
+
+# Local installation
 
 The installation of `fetchR` requires the `rgeos` package successfully installed.
 
@@ -22,28 +26,6 @@ install.packages("devtools")
 library(devtools)
 install_github("blasee/fetchR")
 ```
-
-## Manual download (Windows)
-
-There has been an [issue raised](../../issues/3) (thanks to Darren) about 
-installing `fetchR` on a Windows platform, so here's an update if the above 
-doesn't work. This does not require internet connectivity within R but requires
-the `devtools` package to be installed (code above).
-
-1. Download the .zip file to your computer straight from GitHub [located here](https://github.com/blasee/fetchR/archive/master.zip). Now you will be able to install the package within R.
-2. in R: 
-  + `devtools::install_local(file.path("PATH", "TO", "ZIP", "FILE", "fetchR-master.zip"))` 
-  + or you can navigate to the file manually using pop-up menus:
-  `devtools::install_local(file.choose())`
-3. If these steps have been successful, fetchR will now be installed on your system and can now be used.
-
-Further tips:
-
-* Make sure you are using a [current version of R](https://cran.r-project.org/bin/windows/base/). 
-  + You can check which version you are currently using by typing `R.Version()$version.string` into R.
-* If you are using RStudio (recommended), make sure you are using a [current version](https://www.rstudio.com/products/rstudio/download/).
-  + You can check your current version using the menus: Help --> About RStudio.
-* You can keep packages up to date by typing `update.packages()` in R on a regular basis.
 
 # Calculate average fetch
 
