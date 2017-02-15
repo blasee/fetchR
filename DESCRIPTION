@@ -1,8 +1,8 @@
 Package: fetchR
 Type: Package
 Title: Calculate fetch in New Zealand
-Version: 1.2-1
-Date: 2017-01-31
+Version: 1.2-2
+Date: 2017-02-16
 Authors@R: person("Blake", "Seers", role = c("aut", "cre"),
     email = "blake.seers@gmail.com")
 Imports:

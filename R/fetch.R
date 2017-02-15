@@ -101,7 +101,7 @@ fetch = function(lat, lon, max_dist = 300, n_bearings = 9,
   
   # Create polygon (approximating a circle) with a given radius. These vertices
   # are used for creating the end points for the fetch bearings.
-  d_bff = gBuffer(centre_point_proj, width = max_dist * 1000, quadsegs = n_bearings)
+  d_bff = gBuffer(centre_point_proj, width = max_dist, quadsegs = n_bearings)
   
   # Subset NZ to incorporate only polygons within the radius to speed up 
   # computation times.
