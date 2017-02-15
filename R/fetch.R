@@ -93,6 +93,9 @@ fetch = function(lat, lon, max_dist = 300, n_bearings = 9,
   if (any(!is.na(over(coastal_nz, centre_point_proj))))
     stop("coordinate is on land")
 
+  if (!quiet)
+    message("calculating fetch")
+  
   max_dist = max_dist * 1000
   bearings = head(seq(0, 360, by = 360 / (n_bearings * 4)), -1)
   # Rearrange sequence order to start at 90 degrees to match up with the output
@@ -108,26 +111,28 @@ fetch = function(lat, lon, max_dist = 300, n_bearings = 9,
   coastal_nz_subset = coastal_nz[which(!is.na(over(coastal_nz, d_bff))), ]
   
   # Calculate end points at the maximum distances.
-  max_dist_endpoints = head(coordinates(d_bff@polygons[[1]]@Polygons[[1]]), -1)
+  fetch_ends = head(coordinates(d_bff@polygons[[1]]@Polygons[[1]]), -1)
   
   # Create spatialLines object
-  fetch_sp_lines = create_sp_lines(centre_point_proj, max_dist_endpoints, bearings)
+  fetch_sp_lines = create_sp_lines(centre_point_proj, fetch_ends, bearings)
   
   # Which fetch bearings hit land?
-  hit_land = !sapply(gIntersects(fetch_sp_lines, coastal_nz_subset,
-                                 byid = c(TRUE, FALSE), returnDense = FALSE), 
-                     is.null)
-  
-  # Calculate intersections and identify closest shoreline
-
-  if (!quiet)
-    message("calculating fetch")
-  ints = gIntersection(fetch_sp_lines, coastal_nz_subset, byid = c(TRUE, FALSE))
-
-  fetch_ends = max_dist_endpoints
-  fetch_ends[hit_land, ] = t(sapply(ints@lines, function(x){
-    coordinates(x)[[1]][1, ]
-  }))
+  if (length(coastal_nz_subset) > 0){
+    hit_land = !sapply(gIntersects(fetch_sp_lines, coastal_nz_subset,
+                                   byid = c(TRUE, FALSE), returnDense = FALSE), 
+                       is.null)
+    
+    ## Calculate intersections and identify closest shoreline for those vectors
+    ## that hit land
+    
+    ints = gIntersection(fetch_sp_lines[hit_land], coastal_nz_subset, 
+                         byid = c(TRUE, FALSE))
+    
+    fetch_ends[hit_land, ] = t(sapply(ints@lines, function(x){
+      coordinates(x)[[1]][1, ]
+    }))
+    
+  }
   
   # Return the Fetch object
   
