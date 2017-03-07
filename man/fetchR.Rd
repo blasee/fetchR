@@ -9,37 +9,24 @@
 The \pkg{fetchR} package provides an objective calculation of wind fetch.
 }
 \details{
-Fetch is an important measurement in coastal applications, which
+Fetch is an important measurement in coastal applications. It
 provides a measurement for the unobstructed length of water that wind from a
-certain direction can blow over. The higher the wind fetch from a certain bearing,
- the more energy is imparted to the surface of the 
-water resulting in a larger sea state
-(\url{http://en.wikipedia.org/wiki/Fetch_(geography)}). Therefore, the larger
-the fetch, the larger the exposure to wind and the more likely the coastal
-site experiences large sea states.
+certain direction can blow over. The higher the wind fetch from a certain 
+direction, the more energy is imparted onto the surface of the 
+water resulting in a larger sea state. Therefore, the larger
+the fetch, the larger the exposure to wind and the more likely the
+site experiences larger sea states.
 
-Fetch from all directions can therefore be averaged to provide an overall 
-indication of the location's exposure to wind. The default is to provide the
-lengths (km) for every 10 degree bearings on the NZTM 2000 projection.
-Details of the New Zealand Transverse Mercator 2000 map projection can be found
-at 
-\url{http://www.linz.govt.nz/data/geodetic-system/datums-projections-and-heights/projections/new-zealand-transverse-mercator-2000}.
-
-The \pkg{fetchR} package contains data sourced from Land Information New Zealand under CC-By.
-}
-\note{
-The \pkg{fetchR} package is intended for New Zealand coastal
-applications and only supports the specification of areas within the following bounding 
-box:
-
-\tabular{lll}{
- \tab Min \tab Max \cr
-Longitude \tab 165.869 \tab  183.846 \cr
-Latitude  \tab -52.6209 \tab  -29.2313 \cr
-}
+The fetch length from all directions (and from each quadrant) can therefore 
+be averaged to provide an overall indication of the location's exposure to 
+wind, and from which directions and/or quadrants. The \pkg{fetchR} package 
+calculates the lengths of wind fetch vectors from all directions, at any 
+given location(s) on Earth, and provides summaries, visualisations and KML 
+files along with the raw data.
 }
 \seealso{
-\code{\link{fetch}} for calculating fetch.
+\code{\link{fetch}} for reproducible examples for calculating fetch, 
+         along with summarising, visualising and exporting these calculations.
 }
 \keyword{package}
 

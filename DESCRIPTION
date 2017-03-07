@@ -1,8 +1,8 @@
 Package: fetchR
 Type: Package
-Title: Calculate fetch in New Zealand
-Version: 1.3-0
-Date: 2017-02-16
+Title: Calculate Wind Fetch
+Version: 2.0-0
+Date: 2017-03-08
 Authors@R: person("Blake", "Seers", role = c("aut", "cre"),
     email = "blake.seers@gmail.com")
 Imports:
@@ -10,16 +10,13 @@ Imports:
     sp,
     methods,
     rgeos,
-    stats
+    plotKML,
+    graphics
 Suggests:
     knitr,
-    plotKML
+    ggplot2
 URL: https://github.com/blasee/fetchR
-Description: fetchR is an R package for calculating fetch (exposure). The
-    current convention for calculating fetch is to calculate the distances from the
-    marine location to the shoreline (up to a maximum distance) for every 10 degrees
-    on the compass rose. These fetch vectors are then used to calculate the average
-    fetch (or wind exposure) for the coastal site. The distance and orientation
-    calculations are done on the NZ Transverse Mercator 2000 map projection.
+BugReports: https://github.com/blasee/fetchR/issues
+Description: Wind fetch is the unobstructed length of water over which wind can blow from a certain direction. Averaging the wind fetch for numerous directions at the same location is therefore a reasonable measure of the overall wind exposure. This process of calculating wind fetch can be extremely time-consuming and tedious, particularly if a large number of fetch vectors are required at many locations. The fetchR package calculates wind fetch with ease and summarises the information efficiently. There are also plot methods to help visualise the wind exposure at the various locations, and methods to output the fetch vectors to a KML file for further investigation.
 License: GPL-2
 RoxygenNote: 5.0.1
