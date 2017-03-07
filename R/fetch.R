@@ -6,10 +6,10 @@
 #' marine locations within the boundaries of a specified (polygon) shapefile.
 #' This allows wind fetch to be calculated anywhere around the globe.
 #' 
-#' The function takes a \code{\link{SpatialPolygons-class}} object 
+#' The function takes a \code{\link[sp]{SpatialPolygons-class}} object 
 #' (\code{polygon_layer}) that represents the coastline, surrounding islands, 
 #' and any other obstructions, and calculates the wind fetch for every specifed 
-#' direction. This is done for all the user-defined sites. These sites are 
+#' direction. This is calculated for all the user-defined sites, that are 
 #' represented as the point geometries in a 
 #' \code{\link[sp]{SpatialPoints-class}} object.
 #' 
@@ -19,11 +19,11 @@
 #' or equivalently, one fetch vector every 10 degrees. The first fetch vector is 
 #' always calculated for the northerly direction (0/360 degrees).
 #' 
-#' @param polygon_layer A \code{\link[sp]{SpatialPolygons}} object where the
+#' @param polygon_layer A \code{\link[sp]{SpatialPolygons}}* object where the
 #'                      polygon geometries represent any obstructions to fetch
 #'                      calculations including the coastline, islands and/or 
 #'                      exposed reefs.
-#' @param site_layer A \code{\link[sp]{SpatialPoints}} object where the point 
+#' @param site_layer A \code{\link[sp]{SpatialPoints}}* object where the point 
 #'                   geometries represent the site locations.
 #' @param max_dist numeric. Maximum distance in kilometres (default 300). This 
 #'                 will need to be scaled manually if the units for the CRS are 
@@ -45,44 +45,99 @@
 #' 
 #' @seealso \code{\link[rgdal]{spTransform}} for methods on transforming map 
 #'          projections and datum.
+#' @seealso \code{\link[sp]{is.projected}} for checking whether a spatial object 
+#'          is projected.
+#' @seealso \code{\link{fetchR}} for an overview of this package with
+#'          extensive, reproducible examples.
+#' @seealso \code{\link{summary,Fetch-method}} for summarising the fetch lengths.
+#' @seealso \code{\link{fetchR}}
 #' 
-#' @importFrom sp SpatialPoints CRS over spTransform coordinates
-#' @import rgdal
+#' @importFrom rgdal CRSargs
+#' @importFrom sp SpatialPoints CRS over spTransform coordinates SpatialLinesLengths SpatialLinesDataFrame identicalCRS
 #' @importFrom rgeos gBuffer gIntersects gIntersection
 #' @importFrom utils head
-#' @importFrom methods new
-#' @seealso \code{\link{fetchR}}
+#' @importFrom methods new is
 #' @examples
-#' # Calculate fetch for Kawau Bay
-#' kawau_bay = fetch(-36.4, 174.8)
 #' 
-#' # Show the distances for each direction and the resultant locations
-#' kawau_bay
+#' # Create the polygon layer ----------------------------------------
+#' #
+#' # This is the layer that represents any obstacles that obstruct wind flow.
 #' 
-#' # Summarise the information
-#' summary(kawau_bay)
+#' # Import high-resolution map data for the Philippines.
+#' philippines.df = ggplot2::map_data("world", region = "Philippines")
 #' 
-#' # Plot the vectors
-#' plot(kawau_bay)
+#' # Create a list for each separate polygon
+#' philippines.list = split(philippines.df[, c("long", "lat")], 
+#'                          philippines.df$group)
 #' 
+#' philippines.Poly = lapply(philippines.list, sp::Polygon)
+#' philippines.Polys = list(sp::Polygons(philippines.Poly, ID = "Philippines"))
+#' 
+#' # Include CRS information to make it a SpatialPolygons object
+#' philippines.sp = sp::SpatialPolygons(philippines.Polys, 
+#'                                      proj4string = sp::CRS("+init=epsg:4326"))
+#' 
+#' # Create the points layer ----------------------------------------
+#' #
+#' # The points layer represents the locations for which the wind fetch needs to
+#' # be calculated.
+#' 
+#' # We need to calculate wind fetch for the following 3 sites:
+#' sites.df = data.frame(lon = c(124.4824, 125.8473, 124.8416),
+#'                       lat = c(9.167999, 9.751394, 11.478243),
+#'                       site = c("Camiguin Island", "Bucas Grande Island",
+#'                                "Talalora"))
+#'                       
+#' # Create the SpatialPoints object
+#' sites.sp = sp::SpatialPoints(sites.df[, 1:2], sp::CRS("+init=epsg:4326"))
+#' 
+#' # Map projection -------------------------------------------------
+#' #
+#' # At least one of the polygon or points layers need to be projected to 
+#' # calculate wind fetch.
+#' 
+#' # All these locations lie within the Philippines zone 5 / PRS92, that has
+#' # WGS84 Bounds: 123.8000, 5.3000, 126.7000, 12.7500
+#' # (http://spatialreference.org/ref/epsg/3125/)
+#' # This suggests that this is a suitable map projection.
+#' philippines.proj = spTransform(philippines.sp, "+init=epsg:3125")
+#' 
+#' # Calculate wind fetch -------------------------------------------
+#' # 
+#' # Calculate wind fetch at all the 3 locations for every 10 degrees on the
+#' # compass rose, with a maximum distance for any fetch vector of 300 km.
+#' my_fetch = fetch(philippines.proj, sites.sp, site_names = sites.df$site)
+#' my_fetch
+#' 
+#' # Return only the summary data frame
+#' summary(my_fetch)
+#' 
+#' # Transform the fetch vectors back to the original CRS
+#' my_fetch_latlon = spTransform(my_fetch, sp::proj4string(philippines.sp))
+#' 
+#' # Return the raw data in the original, lat/lon coordinates
+#' my_fetch_latlon.df = as(my_fetch_latlon, "data.frame")
+#' my_fetch_latlon.df
+#' 
+#' # Plot the wind fetch vectors ------------------------------------
+#' 
+#' # Plot the fetch vectors in the projected space...
+#' plot(my_fetch, philippines.proj, axes = TRUE)
+#' 
+#' # ... or in the original coordinate reference system
+#' plot(my_fetch, philippines.sp, axes = TRUE)
+#' 
+#' # Output to KML --------------------------------------------------
 #' \dontrun{
-#' # ---- Output to KML/KMZ
-#' # Install and load plotKML library
-#' if (!require(plotKML))
-#'   install.packages("plotKML")
-#' library(plotKML)
 #' 
-#' Create some labels indicating the fetch vector directions
-#' labs = sapply(slot(kawau_bay, "lines"), slot, "ID")
-#' 
-#' # Save 'kawau_bay.kml' to the current directory
-#' kml(kawau_bay, labels = labs)
+#' # Save a KML file in the current working directory.
+#' kml(my_fetch, colour = "white")
 #' }
 #' @export
 fetch = function(polygon_layer, site_layer, max_dist = 300, n_directions = 9,
                  site_names, quiet = FALSE){
   
-  if (!is(coast_poly, "SpatialPolygons"))
+  if (!is(polygon_layer, "SpatialPolygons"))
     stop(paste("polygon_layer must be a SpatialPolygons object.\nSee",
                "'?sp::SpatialPolygons' for details on how to create a",
                "SpatialPolygons object."), call. = FALSE)
@@ -141,7 +196,7 @@ fetch = function(polygon_layer, site_layer, max_dist = 300, n_directions = 9,
       message("projecting site_layer onto the polygon_layer CRS")
     site_layer = spTransform(site_layer, CRS(proj4string(polygon_layer)))
   }
-
+  
   if (!quiet)
     message("checking site locations are not on land")
   
@@ -155,7 +210,7 @@ fetch = function(polygon_layer, site_layer, max_dist = 300, n_directions = 9,
   
   # Double check if metres are the correct units
   proj_unit = strsplit(gsub("*.+units=", "", 
-                            CRSargs(CRS(proj4string(coast_proj)))), " ")[[1]][1]
+                            CRSargs(CRS(proj4string(polygon_layer)))), " ")[[1]][1]
   
   # If not, warn the user that the supplied max_dist should be scaled 
   # appropriately
@@ -164,6 +219,14 @@ fetch = function(polygon_layer, site_layer, max_dist = 300, n_directions = 9,
             appropriately")
   
   directions = head(seq(0, 360, by = 360 / (n_directions * 4)), -1)
+  
+  # Return the quadrant the directions belong to
+  dirs = as.numeric(directions)
+  dirs_bin = findInterval(dirs, seq(45, 315, by = 90))
+  quadrant = rep("North", length(dirs))
+  quadrant[dirs_bin == 1] = "East"
+  quadrant[dirs_bin == 2] = "South"
+  quadrant[dirs_bin == 3] = "West"
   
   # Rearrange sequence order to start at 90 degrees to match up with the output
   # from gBuffer
@@ -179,7 +242,7 @@ fetch = function(polygon_layer, site_layer, max_dist = 300, n_directions = 9,
     
     ## Create polygon (approximating a circle) with a given radius. These 
     ## vertices are used for creating the end points for the fetch vectors.
-    d_bff = gBuffer(site_layer[i, ], width = max_dist, quadsegs = n_bearings)
+    d_bff = gBuffer(site_layer[i, ], width = max_dist, quadsegs = n_directions)
     
     ## Calculate end points at the maximum distances.
     fetch_ends = head(coordinates(d_bff@polygons[[1]]@Polygons[[1]]), -1)
@@ -219,12 +282,16 @@ fetch = function(polygon_layer, site_layer, max_dist = 300, n_directions = 9,
       fetch_sp_lines = create_sp_lines(line_list, sort(directions), polygon_layer)
     }
     
-    fetch.df = data.frame(fetch = SpatialLinesLengths(fetch_sp_lines) / 1000,
-                          stringsAsFactors = FALSE)
+    fetch.df = data.frame(site = site_names[i],
+                          fetch = SpatialLinesLengths(fetch_sp_lines) / 1000,
+                          direction = sort(directions),
+                          quadrant = factor(quadrant, 
+                                            levels = c("North", "East",
+                                                       "South", "West")))
     
     ## Create a SpatialLinesDataFrame object to include the fetch lengths, and 
     ## add it to the Fetch list
     fetch_list[[i]] = SpatialLinesDataFrame(fetch_sp_lines, fetch.df)
   }
-  fetch_list
+  new("Fetch", fetch_list, names = site_names, max_dist = max_dist / 1000)
 }

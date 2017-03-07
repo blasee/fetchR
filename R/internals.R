@@ -35,15 +35,15 @@ create_line_list = function(d, end_points){
 #
 #' @importFrom sp CRS proj4string SpatialLines Lines Line
 
-create_sp_lines = function(line_list, bearings, polygon){
+create_sp_lines = function(line_list, directions, polygon){
   
   ## Create a list of Lines objects with ID's for each direction
   lines_list = vector("list", length(line_list))
   for (i in seq_along(line_list)){
-    lines_list[[i]] = Lines(list(line_list[[i]]), ID = sort(directions)[i])
+    lines_list[[i]] = Lines(list(line_list[[i]]), ID = directions[i])
   }
   
-  names(lines_list) = bearings
+  names(lines_list) = directions
   
   ## Create a SpatialLines object to calculate intersections
   SpatialLines(lines_list, 
