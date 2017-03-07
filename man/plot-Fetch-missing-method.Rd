@@ -2,21 +2,33 @@
 % Please edit documentation in R/fetch_class.R
 \docType{methods}
 \name{plot,Fetch,missing-method}
+\alias{plot,Fetch,SpatialPolygons-method}
 \alias{plot,Fetch,missing-method}
+\alias{plot,SpatialPolygons,Fetch-method}
 \title{Plot a Fetch Object}
 \usage{
 \S4method{plot}{Fetch,missing}(x, y, ...)
+
+\S4method{plot}{Fetch,SpatialPolygons}(x, y, ...)
+
+\S4method{plot}{SpatialPolygons,Fetch}(x, y, ...)
 }
 \arguments{
-\item{x}{\code{\link{Fetch}} object as returned by \code{\link{fetch}}.}
+\item{x}{either a \code{\link{Fetch}} object as returned by 
+\code{\link{fetch}}, or a \code{\link[sp]{SpatialPolygons}} object.}
 
-\item{y}{missing (not used).}
+\item{y}{can be missing, otherwise same as \code{x}.}
 
-\item{...}{further arguments passed to \code{\link[sp]{plot,SpatialLines,missing-method}}.}
+\item{...}{further arguments passed to 
+\code{\link[sp]{plot,SpatialLines,missing-method}}.}
 }
 \description{
-This is the default plot method for a \code{\link{Fetch}} object. The NZ
-Transverse Mercator 2000 projection is used for the plot and the fetch 
-vectors are plotted as lines originating from the location's coordinates.
+Plot method for \code{\link{Fetch}} objects.
+}
+\details{
+These plot methods allow for the fetch vectors to be plotted (missing 
+\code{y}), or the fetch vectors to be plotted along with a 
+\code{\link[sp]{SpatialPolygons}} object. If both \code{x} and \code{y} are
+supplied, then it does not matter which argument is supplied first.
 }
 
