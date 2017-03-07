@@ -7,6 +7,9 @@ warnings_are_errors: true
 env:
   global:
     - _R_CHECK_FORCE_SUGGESTS_=FALSE
+    
+befone_install:
+  Rscript -e 'update.packages(ask = FALSE)'
 
 r_packages:
   - rgeos
