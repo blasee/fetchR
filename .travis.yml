@@ -1,9 +1,15 @@
 language: r
 
 cache: packages
-sudo: required
+sudo: false
 
 warnings_are_errors: true
+
+addons:
+  apt:
+    packages:
+      - libgdal-dev
+      - libproj-dev
 
 r_packages:
   - rgeos
@@ -11,7 +17,7 @@ r_packages:
   - covr
   
 r_binary_packages:
-  -rgdal
+  - rgdal
 
 notifications:
   email:
