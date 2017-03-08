@@ -1,22 +1,23 @@
 language: r
+r:
+  -oldrel
+  -release
+  -devel
+
 cache: packages
+
 sudo: required
+
+befone_install:
+  - Rscript -e 'update.packages(ask = FALSE)'
+  - sudo apt-get install --yes libproj-dev libgeos-dev libgdal-dev
 
 warnings_are_errors: true
 
-env:
-  global:
-    - _R_CHECK_FORCE_SUGGESTS_=FALSE
-    
-befone_install:
-  Rscript -e 'update.packages(ask = FALSE)'
-
 r_packages:
+  - rgdal
   - rgeos
   - sp
-  
-r_binary_packages:
-  - rgdal
 
 notifications:
   email:
