@@ -17,13 +17,17 @@ library(fetchR)
 
 [![Build Status](https://travis-ci.org/blasee/fetchR.svg)](https://travis-ci.org/blasee/fetchR)
 
+# Wind Fetch
+
+Wind fetch is an important measurement in coastal applications. It provides a measurement for the unobstructed length of water over which wind from a certain direction can blow over. The higher the wind fetch from a certain direction, the more energy is imparted onto the surface of the water resulting in a larger sea state. Therefore, the larger the fetch, the larger the exposure to wind and the more likely the site experiences larger sea states.
+
 # Why *fetchR*?
 
-Wind fetch is an important measurement in coastal applications. It provides a measurement for the unobstructed length of water over which wind from a certain direction can blow over. The higher the wind fetch from a certain direction, the more energy is imparted onto the surface of the water resulting in a larger sea state. Therefore, the larger the fetch, the larger the exposure to wind and the more likely the site experiences larger sea states. 
-
-Averaging the wind fetch for numerous directions at the same location is therefore a reasonable measure of the overall wind exposure. This process of calculating wind fetch can be extremely time-consuming and tedious, particularly if a large number of fetch vectors are required at many locations. The *fetchR* **R** package calculates wind fetch for any marine location on Earth. There are also plot methods to help visualise the wind exposure at the various locations, and methods to output the fetch vectors to a KML file for further investigation.
+Averaging the wind fetch for numerous directions at the same location is a reasonable measure of the overall wind exposure. This process of calculating wind fetch can be extremely time-consuming and tedious, particularly if a large number of fetch vectors are required at many locations. The *fetchR* **R** package calculates wind fetch for any marine location on Earth. There are also plot methods to help visualise the wind exposure at the various locations, and methods to output the fetch vectors to a KML file for further investigation.
 
 # Install *fetchR*
+
+You can install the latest version of *fetchR* from GitHub.
 
 ```{r, eval = FALSE}
 if (!require(devtools))
@@ -88,7 +92,7 @@ manually or within R, as shown below.
 nz_zip = file.path("~", "Downloads",
                    "lds-nz-coastlines-and-islands-polygons-topo-150k-SHP.zip")
 
-if (!file.exists(dl_folder)){
+if (!file.exists(nz_zip)){
   stop("can't find file: ", nz_zip)
 } else{
   dir.create("./nz_poly")
