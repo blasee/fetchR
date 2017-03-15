@@ -57,6 +57,7 @@
 #' @importFrom rgeos gBuffer gIntersects gIntersection
 #' @importFrom utils head
 #' @importFrom methods new is
+#' @import sp
 #' @examples
 #' 
 #' # Create the polygon layer ----------------------------------------
