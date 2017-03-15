@@ -3,7 +3,7 @@
 #' Wind fetch is the unobstructed length of water over which wind can blow, and
 #' it is commonly used as a measure of exposure to wind and waves at coastal 
 #' sites. The \code{fetch} function automatically calculates the wind fetch for
-#' marine locations within the boundaries of a specified (polygon) shapefile.
+#' marine locations within the boundaries of the specified coastline layer.
 #' This allows wind fetch to be calculated anywhere around the globe.
 #' 
 #' The function takes a \code{\link[sp]{SpatialPolygons-class}} object 
@@ -19,11 +19,11 @@
 #' or equivalently, one fetch vector every 10 degrees. The first fetch vector is 
 #' always calculated for the northerly direction (0/360 degrees).
 #' 
-#' @param polygon_layer A \code{\link[sp]{SpatialPolygons}}* object where the
+#' @param polygon_layer \code{\link[sp]{SpatialPolygons}}* object where the
 #'                      polygon geometries represent any obstructions to fetch
 #'                      calculations including the coastline, islands and/or 
 #'                      exposed reefs.
-#' @param site_layer A \code{\link[sp]{SpatialPoints}}* object where the point 
+#' @param site_layer \code{\link[sp]{SpatialPoints}}* object where the point 
 #'                   geometries represent the site locations.
 #' @param max_dist numeric. Maximum distance in kilometres (default 300). This 
 #'                 will need to be scaled manually if the units for the CRS are 
@@ -47,10 +47,9 @@
 #'          projections and datum.
 #' @seealso \code{\link[sp]{is.projected}} for checking whether a spatial object 
 #'          is projected.
-#' @seealso \code{\link{fetchR}} for an overview of this package with
-#'          extensive, reproducible examples.
+#' @seealso \code{\link{fetchR}} for an overview of this package with an
+#'          extensive, reproducible example.
 #' @seealso \code{\link{summary,Fetch-method}} for summarising the fetch lengths.
-#' @seealso \code{\link{fetchR}}
 #' 
 #' @importFrom rgdal CRSargs
 #' @importFrom sp SpatialPoints CRS over spTransform coordinates SpatialLinesLengths SpatialLinesDataFrame identicalCRS
@@ -64,19 +63,19 @@
 #' #
 #' # This is the layer that represents any obstacles that obstruct wind flow.
 #' 
-#' # Import high-resolution map data for the Philippines.
+#' # Import map data for the Philippines.
 #' philippines.df = ggplot2::map_data("world", region = "Philippines")
 #' 
 #' # Create a list for each separate polygon
 #' philippines.list = split(philippines.df[, c("long", "lat")], 
 #'                          philippines.df$group)
 #' 
-#' philippines.Poly = lapply(philippines.list, sp::Polygon)
-#' philippines.Polys = list(sp::Polygons(philippines.Poly, ID = "Philippines"))
+#' philippines.Poly = lapply(philippines.list, Polygon)
+#' philippines.Polys = list(Polygons(philippines.Poly, ID = "Philippines"))
 #' 
 #' # Include CRS information to make it a SpatialPolygons object
-#' philippines.sp = sp::SpatialPolygons(philippines.Polys, 
-#'                                      proj4string = sp::CRS("+init=epsg:4326"))
+#' philippines.sp = SpatialPolygons(philippines.Polys, 
+#'                                      proj4string = CRS("+init=epsg:4326"))
 #' 
 #' # Create the points layer ----------------------------------------
 #' #
@@ -90,7 +89,7 @@
 #'                                "Talalora"))
 #'                       
 #' # Create the SpatialPoints object
-#' sites.sp = sp::SpatialPoints(sites.df[, 1:2], sp::CRS("+init=epsg:4326"))
+#' sites.sp = SpatialPoints(sites.df[, 1:2], CRS("+init=epsg:4326"))
 #' 
 #' # Map projection -------------------------------------------------
 #' #
@@ -114,7 +113,7 @@
 #' summary(my_fetch)
 #' 
 #' # Transform the fetch vectors back to the original CRS
-#' my_fetch_latlon = spTransform(my_fetch, sp::proj4string(philippines.sp))
+#' my_fetch_latlon = spTransform(my_fetch, proj4string(philippines.sp))
 #' 
 #' # Return the raw data in the original, lat/lon coordinates
 #' my_fetch_latlon.df = as(my_fetch_latlon, "data.frame")
@@ -140,12 +139,12 @@ fetch = function(polygon_layer, site_layer, max_dist = 300, n_directions = 9,
   
   if (!is(polygon_layer, "SpatialPolygons"))
     stop(paste("polygon_layer must be a SpatialPolygons object.\nSee",
-               "'?sp::SpatialPolygons' for details on how to create a",
+               "'?SpatialPolygons' for details on how to create a",
                "SpatialPolygons object."), call. = FALSE)
   
   if (!is(site_layer, "SpatialPoints"))
     stop(paste("site_layer must be a SpatialPoints object.\nSee",
-         "'?sp::SpatialPoints' for details on how to create a SpatialPoints",
+         "'?SpatialPoints' for details on how to create a SpatialPoints",
          "object."), call. = FALSE)
   
   if (!is.numeric(max_dist) || length(max_dist) != 1)

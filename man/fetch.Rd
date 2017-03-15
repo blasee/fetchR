@@ -8,12 +8,12 @@ fetch(polygon_layer, site_layer, max_dist = 300, n_directions = 9,
   site_names, quiet = FALSE)
 }
 \arguments{
-\item{polygon_layer}{A \code{\link[sp]{SpatialPolygons}}* object where the
+\item{polygon_layer}{\code{\link[sp]{SpatialPolygons}}* object where the
 polygon geometries represent any obstructions to fetch
 calculations including the coastline, islands and/or 
 exposed reefs.}
 
-\item{site_layer}{A \code{\link[sp]{SpatialPoints}}* object where the point 
+\item{site_layer}{\code{\link[sp]{SpatialPoints}}* object where the point 
 geometries represent the site locations.}
 
 \item{max_dist}{numeric. Maximum distance in kilometres (default 300). This 
@@ -35,7 +35,7 @@ Returns a \code{\link{Fetch}} object.
 Wind fetch is the unobstructed length of water over which wind can blow, and
 it is commonly used as a measure of exposure to wind and waves at coastal 
 sites. The \code{fetch} function automatically calculates the wind fetch for
-marine locations within the boundaries of a specified (polygon) shapefile.
+marine locations within the boundaries of the specified coastline layer.
 This allows wind fetch to be calculated anywhere around the globe.
 }
 \details{
@@ -66,19 +66,19 @@ At least one of the inputs to the \code{polygon_layer} or
 #
 # This is the layer that represents any obstacles that obstruct wind flow.
 
-# Import high-resolution map data for the Philippines.
+# Import map data for the Philippines.
 philippines.df = ggplot2::map_data("world", region = "Philippines")
 
 # Create a list for each separate polygon
 philippines.list = split(philippines.df[, c("long", "lat")], 
                          philippines.df$group)
 
-philippines.Poly = lapply(philippines.list, sp::Polygon)
-philippines.Polys = list(sp::Polygons(philippines.Poly, ID = "Philippines"))
+philippines.Poly = lapply(philippines.list, Polygon)
+philippines.Polys = list(Polygons(philippines.Poly, ID = "Philippines"))
 
 # Include CRS information to make it a SpatialPolygons object
-philippines.sp = sp::SpatialPolygons(philippines.Polys, 
-                                     proj4string = sp::CRS("+init=epsg:4326"))
+philippines.sp = SpatialPolygons(philippines.Polys, 
+                                     proj4string = CRS("+init=epsg:4326"))
 
 # Create the points layer ----------------------------------------
 #
@@ -92,7 +92,7 @@ sites.df = data.frame(lon = c(124.4824, 125.8473, 124.8416),
                                "Talalora"))
                       
 # Create the SpatialPoints object
-sites.sp = sp::SpatialPoints(sites.df[, 1:2], sp::CRS("+init=epsg:4326"))
+sites.sp = SpatialPoints(sites.df[, 1:2], CRS("+init=epsg:4326"))
 
 # Map projection -------------------------------------------------
 #
@@ -116,7 +116,7 @@ my_fetch
 summary(my_fetch)
 
 # Transform the fetch vectors back to the original CRS
-my_fetch_latlon = spTransform(my_fetch, sp::proj4string(philippines.sp))
+my_fetch_latlon = spTransform(my_fetch, proj4string(philippines.sp))
 
 # Return the raw data in the original, lat/lon coordinates
 my_fetch_latlon.df = as(my_fetch_latlon, "data.frame")
@@ -144,11 +144,9 @@ kml(my_fetch, colour = "white")
 \code{\link[sp]{is.projected}} for checking whether a spatial object 
          is projected.
 
-\code{\link{fetchR}} for an overview of this package with
-         extensive, reproducible examples.
+\code{\link{fetchR}} for an overview of this package with an
+         extensive, reproducible example.
 
 \code{\link{summary,Fetch-method}} for summarising the fetch lengths.
-
-\code{\link{fetchR}}
 }
 

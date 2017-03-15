@@ -1,6 +1,8 @@
 #' Calculate Wind Exposure with the \pkg{fetchR} Package
 #' 
-#' The \pkg{fetchR} package provides an objective calculation of wind fetch.
+#' The \pkg{fetchR} package allows for an objective calculation of wind fetch 
+#' and provides methods to visualise the wind exposure and export the fetch 
+#' vectors to a KML file.
 #' 
 #' Fetch is an important measurement in coastal applications. It
 #' provides a measurement for the unobstructed length of water that wind from a
@@ -10,15 +12,16 @@
 #' the fetch, the larger the exposure to wind and the more likely the
 #' site experiences larger sea states.
 #' 
-#' The fetch length from all directions (and from each quadrant) can therefore 
-#' be averaged to provide an overall indication of the location's exposure to 
-#' wind, and from which directions and/or quadrants. The \pkg{fetchR} package 
+#' The fetch length from all directions (and from each quadrant) can 
+#' be averaged to provide an indication of the location's exposure to 
+#' wind. The \pkg{fetchR} package 
 #' calculates the lengths of wind fetch vectors from all directions, at any 
-#' given location(s) on Earth, and provides summaries, visualisations and KML 
+#' given location(s) on Earth, and can provide summaries, visualisations and KML 
 #' files along with the raw data.
 #'  
-#' @seealso \code{\link{fetch}} for reproducible examples for calculating fetch, 
-#'          along with summarising, visualising and exporting these calculations.
+#' @seealso \code{\link{fetch}} for an extensive reproducible example.
+#' @seealso \code{vignette("introduction-to-fetchR")} for a short introduction 
+#' to **fetchR**.
 #' @name fetchR
 #' @docType package
 #' @keywords package
@@ -73,9 +76,9 @@ setValidity("Fetch", valid_fetch)
 #' 
 #' The \code{summary} function calculates the average fetch for the separate 
 #' northerly, easterly, southerly and westerly quadrants. For example, the mean 
-#' fetch for the northerly component averages over the fetch vectors between 
-#' directions 315 (inclusive) and 45 (exclusive), i.e. the fetch vectors within 
-#' the interval [315, 45).
+#' fetch for the northerly component averages over the fetch vectors with 
+#' directions between 315 (inclusive) and 45 (exclusive) degrees, i.e. the fetch 
+#' vectors within the interval [315, 45).
 #' 
 #' @return The \code{summary} function returns a \code{\link{data.frame}}.
 #' 

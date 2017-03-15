@@ -20,8 +20,8 @@ The \code{summary} function returns a \code{\link{data.frame}}.
 \description{
 The \code{summary} function calculates the average fetch for the separate 
 northerly, easterly, southerly and westerly quadrants. For example, the mean 
-fetch for the northerly component averages over the fetch vectors between 
-directions 315 (inclusive) and 45 (exclusive), i.e. the fetch vectors within 
-the interval [315, 45).
+fetch for the northerly component averages over the fetch vectors with 
+directions between 315 (inclusive) and 45 (exclusive) degrees, i.e. the fetch 
+vectors within the interval [315, 45).
 }
 
