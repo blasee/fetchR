@@ -238,7 +238,7 @@ setMethod("plot",
             }
 
             plot(as(x, "SpatialLines"), ...)
-            plot(y, add = TRUE, col = "lightgrey")
+            plot(y, add = TRUE, col = "lightgrey", border = "lightgrey")
             box()
             box()
           })
