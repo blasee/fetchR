@@ -69,6 +69,8 @@
 #' # Create a list for each separate polygon
 #' philippines.list = split(philippines.df[, c("long", "lat")], 
 #'                          philippines.df$group)
+#'                          
+#' library(sp)
 #' 
 #' philippines.Poly = lapply(philippines.list, Polygon)
 #' philippines.Polys = list(Polygons(philippines.Poly, ID = "Philippines"))
