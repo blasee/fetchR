@@ -221,7 +221,6 @@ setMethod("plot",
 
 #' @rdname plot-Fetch-missing-method
 #' @importFrom methods setMethod as signature validObject
-#' @importFrom graphics box
 #' @importFrom sp plot proj4string CRS identicalCRS
 #' @export
 setMethod("plot",
@@ -239,8 +238,6 @@ setMethod("plot",
 
             plot(as(x, "SpatialLines"), ...)
             plot(y, add = TRUE, col = "lightgrey", border = NA)
-            box()
-            box()
           })
 
 #' @rdname plot-Fetch-missing-method
