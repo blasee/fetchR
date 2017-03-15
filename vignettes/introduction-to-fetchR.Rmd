@@ -10,6 +10,7 @@ vignette: >
 ---
 
 ```{r, init, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 load("data/my_fetch.RData")
 my_fetch_latlon.df = as(my_fetch_latlon, "data.frame")
 ```
@@ -68,7 +69,7 @@ is(nz_poly_latlon, "SpatialPolygons")
 ```
 
 ```
-## TRUE
+#> TRUE
 ```
 
 ##### Note
