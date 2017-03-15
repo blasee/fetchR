@@ -35,4 +35,4 @@ vignette("introduction-to-fetchR")
 example(fetch)
 ```
 
-![Output to KML](./figures/kml.png)
+![Output to KML](./README_figures/kml.png)

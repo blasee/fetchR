@@ -2,7 +2,7 @@
 ^\.Rproj\.user$
 ^\.Rhistory$
 ^\.travis\.yml$
-figures/
+^README_figures/
 nz_poly/
 ^.gitignore$
 ^README\.Rmd$

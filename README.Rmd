@@ -10,7 +10,7 @@ output:
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "figures/README-"
+  fig.path = "README_figures/README-"
 )
 library(fetchR)
 ```
@@ -49,4 +49,4 @@ example(fetch)
 ```
 
 
-![Output to KML](./figures/kml.png)
+![Output to KML](./README_figures/kml.png)
