@@ -4,7 +4,12 @@
 * win-builder (devel and release)
 
 ## R CMD check results
-There were no ERRORs, WARNINGs or NOTEs.
+There were no ERRORs or WARNINGs.
+
+### NOTEs
+* This is my first submission and this is the correct email address.
+
+The possibly mis-spelled words in the DESCRIPTION are spelled correctly.
 
 ## Downstream dependencies
 There are currently no downstream dependencies.
