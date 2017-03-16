@@ -39,6 +39,10 @@ my_fetch_proj = fetch(nz_poly_proj, fetch_locs_proj)
 my_fetch_proj
 ```
 
+##### Note
+
+The data for the polygon layer was sourced from [Land Information New Zealand](https://data.linz.govt.nz/layer/1153-nz-coastlines-and-islands-polygons-topo-150k/)[1].
+
     #> Is projected : TRUE
     #> Max distance : 300 km
     #> Directions   : 36
@@ -91,3 +95,5 @@ vignette("introduction-to-fetchR")
 # Reproduce a simple example
 example(fetch)
 ```
+
+[1] This README contains data that was sourced from Land Information New Zealand without adaptation that is protected under CC-By Land Information New Zealand.

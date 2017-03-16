@@ -198,4 +198,6 @@ kml(my_fetch_latlon, colour = "white")
 
 ![Figure 7. The resultant KML file opened in Google Earth. Reassuringly, the length of the selected fetch vector that reaches its maximum distance is calculated as exactly 300 km by Google Earth.](./figures/kml.png)
 
-[^1]: This requires a (free) [registration to the LINZ Data Service](https://data.linz.govt.nz/accounts/register/) and acceptance of the [terms of conditions](https://data.linz.govt.nz/terms-of-use/) and [privacy policy](https://data.linz.govt.nz/privacy-policy/).
+[^1]: This requires a (free) [registration to the LINZ Data Service](https://data.linz.govt.nz/accounts/register/) and acceptance of the [terms of conditions](https://data.linz.govt.nz/terms-of-use/) and [privacy policy](https://data.linz.govt.nz/privacy-policy/). The data sourced from
+Land Information New Zealand has not been adapted and is protected under 
+CC-By Land Information New Zealand.
