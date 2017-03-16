@@ -31,6 +31,8 @@ Calculating wind fetch with **fetchR**
 
 If you already have a `SpatialPolygons` object representing the coastline and surrounding islands, and a `SpatialPoints` object representing the locations, then calculating wind fetch with **fetchR** is easy. You can just pass these two arguments into the `fetch` function.
 
+![Map showing the projected SpatialPolygons (filled grey polygons) and SpatialPoints (black crosses) objects.](./vignettes/figures/proj.png)
+
 ``` r
 # Calculate wind fetch by passing in the projected SpatialPolygons object (nz_poly_proj)
 # and the projected SpatialPoints object (fetch_locs_proj) to the fetch function.
@@ -63,13 +65,13 @@ Visualise the fetch vectors
 plot(my_fetch_proj, nz_poly_proj)
 ```
 
-![Fetch vectors at all the sites](./README_figures/all_fetch.png)
+![Fetch vectors at all the sites](./vignettes/figures/nz_fetch.png)
 
-![Fetch vectors at Kawau Bay](./README_figures/kawau.png)
+![Fetch vectors at Kawau Bay](./vignettes/figures/kawau.png)
 
-![Fetch vectors at the Chetwode Islands](./README_figures/chetwode.png)
+![Fetch vectors at the Chetwode Islands](./vignettes/figures/chetwode.png)
 
-![Fetch vectors at Foveaux Strait](./README_figures/foveaux.png)
+![Fetch vectors at Foveaux Strait](./vignettes/figures/foveaux.png)
 
 Export to a KML file
 ====================
@@ -81,7 +83,7 @@ kml(my_fetch_proj)
 
 Note that the distances calculated in Google Earth are (almost) the same as the distances calculated with **fetchR**. This can be seen in the KML output as the fetch vector at 90 degrees for the Foveaux Strait site is 300km (the maximum distance by default) in both **fetchR** and Google Earth, although these algorithms differ.
 
-![Output to KML](./README_figures/kml.png)
+![Output to KML](./vignettes/figures/kml.png)
 
 Get started with **fetchR**
 ===========================
