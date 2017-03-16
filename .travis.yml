@@ -1,8 +1,11 @@
 language: r
-
+cache: packages
 warnings_are_errors: true
 
 sudo: required
+
+before_install:
+  Rscript -e 'update.packages(ask = FALSE)'
 
 r_packages:
   - rgeos
