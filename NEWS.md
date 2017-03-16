@@ -3,7 +3,7 @@
 ## Major changes
 
 * **fetchR** is now generalised to incorporate `SpatialPolyons` representing any
-marine location on Earth (#6). As a result, **fetchR* 2.0 is no longer limited 
+marine location on Earth (#6). As a result, **fetchR** 2.0 is no longer limited 
 to calculating wind fetch within New Zealand coastal areas.
 
 ### Rewrite the entire algorithm for calculating wind fetch. 
