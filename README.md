@@ -1,5 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Build Status](https://travis-ci.org/blasee/fetchR.svg)](https://travis-ci.org/blasee/fetchR)
+[![Build Status](https://travis-ci.org/blasee/fetchR.svg)](https://travis-ci.org/blasee/fetchR) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/fetchR)](https://cran.r-project.org/package=fetchR)
 
 Wind fetch
 ==========
@@ -14,13 +14,11 @@ Averaging the wind fetch for numerous directions at the same location is a reaso
 Installation
 ============
 
-You can install the latest version of **fetchR** from GitHub.
+You can install the latest version of **fetchR** from CRAN.
 
 ``` r
-if (!require(devtools))
-  install.packages("devtools")
-
-devtools::install_github("blasee/fetchR", build_vignettes = TRUE)
+# Install fetchR
+install.packages("fetchR")
 
 # Load the fetchR package
 library(fetchR)
