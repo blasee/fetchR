@@ -7,3 +7,4 @@ nz_poly/
 ^.gitignore$
 ^README\.Rmd$
 ^cran-comments\.md$
+^NEWS\.md$
