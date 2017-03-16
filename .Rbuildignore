@@ -5,6 +5,6 @@
 ^README\.Rmd$
 ^cran-comments\.md$
 ^NEWS\.md$
-^nz_poly/$
-^README_figures/$
+^nz_poly/
+^README_figures/
 ^\.gitignore$
