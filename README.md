@@ -1,5 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Build Status](https://travis-ci.org/blasee/fetchR.svg)](https://travis-ci.org/blasee/fetchR) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/fetchR)](https://cran.r-project.org/package=fetchR)
+[![Build Status](https://travis-ci.org/blasee/fetchR.svg)](https://travis-ci.org/blasee/fetchR) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/fetchR)](https://cran.r-project.org/package=fetchR) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.400607.svg)](https://doi.org/10.5281/zenodo.400607)
 
 Wind fetch
 ==========
@@ -76,7 +76,7 @@ Export to a KML file
 
 ``` r
 # Export the fetch vectors to a KML file for further investigation
-kml(my_fetch_proj)
+kml(my_fetch_proj, colour = "white")
 ```
 
 Note that the distances calculated in Google Earth are (almost) the same as the distances calculated with **fetchR**. This can be seen in the KML output as the fetch vector at 90 degrees for the Foveaux Strait site is 300km (the maximum distance by default) in both **fetchR** and Google Earth, although these algorithms differ.
