@@ -16,7 +16,7 @@ Suggests:
     ggplot2,
     maps,
     rmarkdown
-URL: https://github.com/blasee/fetchR
+URL: https://cran.r-project.org/package=fetchR
 BugReports: https://github.com/blasee/fetchR/issues
 Description: Wind fetch is the unobstructed length of water over which wind can blow from a certain direction. Averaging the wind fetch for numerous directions at the same location is therefore a reasonable measure of the overall wind exposure for a specific marine location. However, this process of calculating wind fetch can be extremely time-consuming and tedious, particularly if a large number of fetch vectors are required at many locations. The fetchR package calculates wind fetch with ease and summarises the information efficiently. There are also plot methods to help visualise the wind exposure at the various locations, and methods to output the fetch vectors to a KML file for further investigation.
 License: GPL-2
