@@ -1,3 +1,9 @@
+# fetchR 2.0-1
+
+## Minor changes
+
+* use `on.exit` to close the KML file connection in `kml,Fetch` method
+
 # fetchR 2.0-0
 
 ## Major changes

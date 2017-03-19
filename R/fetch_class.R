@@ -279,12 +279,13 @@ setMethod("kml",
                        substitute(obj, env = parent.frame()))), ".kml", 
                        sep = ""), 
                      overwrite = FALSE, ...){
-            validObject(obj)
-            kml_open(file.name = file.name, folder.name = folder.name, 
-                     overwrite = overwrite, kml_visibility = FALSE)
-            
-            for (i in seq_along(obj))
-              kml_layer(obj[[i]], subfolder.name = obj@names[i], ...)
-            
-            kml_close(file.name)
-          })
+              validObject(obj)
+              
+              kml_open(file.name = file.name, folder.name = folder.name, 
+                       overwrite = overwrite, kml_visibility = FALSE)
+              
+              on.exit(kml_close(file.name))
+              
+              for (i in seq_along(obj))
+                kml_layer(obj[[i]], subfolder.name = obj@names[i], ...)
+            })

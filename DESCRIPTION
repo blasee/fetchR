@@ -1,8 +1,8 @@
 Package: fetchR
 Type: Package
 Title: Calculate Wind Fetch in R
-Version: 2.0-0
-Date: 2017-03-16
+Version: 2.0-1
+Date: 2017-03-20
 Authors@R: person("Blake", "Seers", role = c("aut", "cre"),
     email = "blake.seers@gmail.com")
 Imports:
