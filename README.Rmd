@@ -112,7 +112,7 @@ example(fetch)
 
 # Citation
 
-```{r}
+```{r, echo = FALSE}
 citation("fetchR")
 ```
 
