@@ -16,6 +16,7 @@ library(fetchR)
 
 [![Build Status](https://travis-ci.org/blasee/fetchR.svg)](https://travis-ci.org/blasee/fetchR)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fetchR)](https://cran.r-project.org/package=fetchR)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.400607.svg)](https://doi.org/10.5281/zenodo.400607)
 
 # Wind fetch
 
@@ -86,7 +87,7 @@ plot(my_fetch_proj, nz_poly_proj)
 
 ```{r, eval = FALSE}
 # Export the fetch vectors to a KML file for further investigation
-kml(my_fetch_proj)
+kml(my_fetch_proj, colour = "white")
 ```
 
 Note that the distances calculated in Google Earth are (almost) the
