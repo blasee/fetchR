@@ -16,7 +16,6 @@ library(fetchR)
 
 [![Build Status](https://travis-ci.org/blasee/fetchR.svg)](https://travis-ci.org/blasee/fetchR)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fetchR)](https://cran.r-project.org/package=fetchR)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.400607.svg)](https://doi.org/10.5281/zenodo.400607)
 
 # Wind fetch
 
@@ -110,6 +109,13 @@ vignette("introduction-to-fetchR")
 # Reproduce a simple example
 example(fetch)
 ```
+
+# Citation
+
+```{r}
+citation("fetchR")
+```
+
 
 [^1]: This README contains data that was sourced from Land Information New Zealand
 without adaptation that is protected under CC-By Land Information New Zealand.

@@ -1,5 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Build Status](https://travis-ci.org/blasee/fetchR.svg)](https://travis-ci.org/blasee/fetchR) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/fetchR)](https://cran.r-project.org/package=fetchR) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.400607.svg)](https://doi.org/10.5281/zenodo.400607)
+[![Build Status](https://travis-ci.org/blasee/fetchR.svg)](https://travis-ci.org/blasee/fetchR) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/fetchR)](https://cran.r-project.org/package=fetchR)
 
 Wind fetch
 ==========
@@ -94,6 +94,28 @@ vignette("introduction-to-fetchR")
 
 # Reproduce a simple example
 example(fetch)
+```
+
+Citation
+========
+
+``` r
+citation("fetchR")
+#> 
+#> To cite package 'fetchR' in publications use:
+#> 
+#>   Blake Seers (2017). fetchR: Calculate Wind Fetch in R. R package
+#>   version 2.0-1. https://github.com/blasee/fetchR
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Manual{,
+#>     title = {fetchR: Calculate Wind Fetch in R},
+#>     author = {Blake Seers},
+#>     year = {2017},
+#>     note = {R package version 2.0-1},
+#>     url = {https://github.com/blasee/fetchR},
+#>   }
 ```
 
 [1] This README contains data that was sourced from Land Information New Zealand without adaptation that is protected under CC-By Land Information New Zealand.
