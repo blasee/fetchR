@@ -151,4 +151,3 @@ kml(my_fetch, colour = "white")
 
 \code{\link{summary,Fetch-method}} for summarising the fetch lengths.
 }
-

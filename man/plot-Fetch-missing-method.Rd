@@ -2,8 +2,8 @@
 % Please edit documentation in R/fetch_class.R
 \docType{methods}
 \name{plot,Fetch,missing-method}
-\alias{plot,Fetch,SpatialPolygons-method}
 \alias{plot,Fetch,missing-method}
+\alias{plot,Fetch,SpatialPolygons-method}
 \alias{plot,SpatialPolygons,Fetch-method}
 \title{Plot a Fetch Object}
 \usage{
@@ -31,4 +31,3 @@ These plot methods allow for the fetch vectors to be plotted (missing
 \code{\link[sp]{SpatialPolygons}} object. If both \code{x} and \code{y} are
 supplied, then it does not matter which argument is supplied first.
 }
-

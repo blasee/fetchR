@@ -29,4 +29,3 @@ Write a \code{\link{Fetch}} object to a KML file. Various aesthetics
 parameters can be set via \code{colour}, \code{alpha}, \code{size}, 
 \code{shape} arguments.
 }
-

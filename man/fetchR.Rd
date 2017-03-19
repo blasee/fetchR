@@ -33,4 +33,3 @@ files along with the raw data.
 to **fetchR**.
 }
 \keyword{package}
-
