@@ -31,6 +31,10 @@ If you already have a `SpatialPolygons` object representing the coastline and su
 
 ![Map showing the projected SpatialPolygons (filled grey polygons) and SpatialPoints (black crosses) objects.](./vignettes/figures/proj.png)
 
+##### Note
+
+The data for the polygon layer was sourced from [Land Information New Zealand](https://data.linz.govt.nz/layer/1153-nz-coastlines-and-islands-polygons-topo-150k/)[1].
+
 ``` r
 # Calculate wind fetch by passing in the projected SpatialPolygons object (nz_poly_proj)
 # and the projected SpatialPoints object (fetch_locs_proj) to the fetch function.
@@ -38,10 +42,6 @@ my_fetch_proj = fetch(nz_poly_proj, fetch_locs_proj)
 
 my_fetch_proj
 ```
-
-##### Note
-
-The data for the polygon layer was sourced from [Land Information New Zealand](https://data.linz.govt.nz/layer/1153-nz-coastlines-and-islands-polygons-topo-150k/)[1].
 
     #> Is projected : TRUE
     #> Max distance : 300 km
