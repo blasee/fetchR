@@ -1,8 +1,10 @@
-# fetchR 2.0-1
+# fetchR 2.0-1-999
 
 ## Minor changes
 
-* use `on.exit` to close the KML file connection in `kml,Fetch` method
+* Use `on.exit` to close the KML file connection in `kml,Fetch` method
+* Site names are automatically read from the data associated with the shapefile.
+  The names have to be in a column with a name matching "^[Nn]ames{0,1}$"
 
 # fetchR 2.0-0
 

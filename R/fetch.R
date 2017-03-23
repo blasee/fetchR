@@ -30,8 +30,11 @@
 #'                 not 'm'.
 #' @param n_directions numeric. The number of fetch vectors to calculate per 
 #'                     quadrant (default 9).
-#' @param site_names character vector of the site names. If missing, default 
-#'                   names are created ('Site 1', 'Site 2', ...).
+#' @param site_names character vector of the site names. If missing, the site 
+#'                   names are taken from a column of the data associated with 
+#'                   \code{site_layer} matching the regular expression 
+#'                   \code{^[Nn]ames{0,1}}. If there is no such column, then 
+#'                   default names are created ('Site 1', 'Site 2', ...).
 #' @param quiet logical. Suppress diagnostic messages? (Default \code{FALSE}).
 #' 
 #' @return Returns a \code{\link{Fetch}} object.
@@ -168,7 +171,12 @@ fetch = function(polygon_layer, site_layer, max_dist = 300, n_directions = 9,
       site_names = paste("Site", seq_along(site_layer))
     }
   } else {
-    site_names = paste("Site", seq_along(site_layer))
+    if (any(grepl("^[Nn]ames{0,1}$", names(site_layer)))){
+      name_col = grep("^[Nn]ames{0,1}$", names(site_layer))
+      site_names = as.character(data.frame(site_layer)[, name_col[[1]]])
+    } else {
+      site_names = paste("Site", seq_along(site_layer))
+    }
   }
   
   quiet = as.logical(quiet[1])

@@ -23,8 +23,11 @@ not 'm'.}
 \item{n_directions}{numeric. The number of fetch vectors to calculate per 
 quadrant (default 9).}
 
-\item{site_names}{character vector of the site names. If missing, default 
-names are created ('Site 1', 'Site 2', ...).}
+\item{site_names}{character vector of the site names. If missing, the site 
+names are taken from a column of the data associated with 
+\code{site_layer} matching the regular expression 
+\code{^[Nn]ames{0,1}}. If there is no such column, then 
+default names are created ('Site 1', 'Site 2', ...).}
 
 \item{quiet}{logical. Suppress diagnostic messages? (Default \code{FALSE}).}
 }
