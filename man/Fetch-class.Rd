@@ -19,9 +19,8 @@ objects.
 \item{\code{max_dist}}{numeric vector of length 1 containing the maximum distance
 a fetch vector is allowed.}
 }}
-
 \note{
-Fetch objects should only be created using the \code{\link{fetch}} 
+Fetch objects should only be created using the \code{\link{fetch}}
 function.
 }
 \section{Extends}{

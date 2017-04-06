@@ -19,9 +19,10 @@ which case it is converted to \code{\link{CRS}}}
 \item{...}{further arguments (ignored)}
 }
 \value{
-\code{\link{Fetch}} object with coordinates transformed to the 
+\code{\link{Fetch}} object with coordinates transformed to the
         new coordinate system.
 }
 \description{
 spTransform for map projection and datum transformation
 }
+

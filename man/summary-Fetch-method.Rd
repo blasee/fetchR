@@ -2,8 +2,8 @@
 % Please edit documentation in R/fetch_class.R
 \docType{methods}
 \name{summary,Fetch-method}
-\alias{summary,Fetch-method}
 \alias{show,Fetch-method}
+\alias{summary,Fetch-method}
 \title{Summarise a Fetch Object}
 \usage{
 \S4method{summary}{Fetch}(object)
@@ -11,16 +11,17 @@
 \S4method{show}{Fetch}(object)
 }
 \arguments{
-\item{object}{a \code{Fetch} object that has been returned by the 
+\item{object}{a \code{Fetch} object that has been returned by the
 \code{\link{fetch}} function.}
 }
 \value{
 The \code{summary} function returns a \code{\link{data.frame}}.
 }
 \description{
-The \code{summary} function calculates the average fetch for the separate 
-northerly, easterly, southerly and westerly quadrants. For example, the mean 
-fetch for the northerly component averages over the fetch vectors with 
-directions between 315 (inclusive) and 45 (exclusive) degrees, i.e. the fetch 
+The \code{summary} function calculates the average fetch for the separate
+northerly, easterly, southerly and westerly quadrants. For example, the mean
+fetch for the northerly component averages over the fetch vectors with
+directions between 315 (inclusive) and 45 (exclusive) degrees, i.e. the fetch
 vectors within the interval [315, 45).
 }
+

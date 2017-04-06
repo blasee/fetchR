@@ -18,14 +18,15 @@
 
 \item{file.name}{character; output KML file name}
 
-\item{overwrite}{logical; overwrite the existing file if one exists? Default 
+\item{overwrite}{logical; overwrite the existing file if one exists? Default
 FALSE}
 
-\item{...}{additional aesthetics arguments passed to 
+\item{...}{additional aesthetics arguments passed to
 \code{\link[plotKML]{kml_layer.SpatialLines}}}
 }
 \description{
 Write a \code{\link{Fetch}} object to a KML file. Various aesthetics
-parameters can be set via \code{colour}, \code{alpha}, \code{size}, 
+parameters can be set via \code{colour}, \code{alpha}, \code{size},
 \code{shape} arguments.
 }
+

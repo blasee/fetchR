@@ -6,30 +6,31 @@
 \alias{fetchR-package}
 \title{Calculate Wind Exposure with the \pkg{fetchR} Package}
 \description{
-The \pkg{fetchR} package allows for an objective calculation of wind fetch 
-and provides methods to visualise the wind exposure and export the fetch 
+The \pkg{fetchR} package allows for an objective calculation of wind fetch
+and provides methods to visualise the wind exposure and export the fetch
 vectors to a KML file.
 }
 \details{
 Fetch is an important measurement in coastal applications. It
 provides a measurement for the unobstructed length of water that wind from a
-certain direction can blow over. The higher the wind fetch from a certain 
-direction, the more energy is imparted onto the surface of the 
+certain direction can blow over. The higher the wind fetch from a certain
+direction, the more energy is imparted onto the surface of the
 water resulting in a larger sea state. Therefore, the larger
 the fetch, the larger the exposure to wind and the more likely the
 site experiences larger sea states.
 
-The fetch length from all directions (and from each quadrant) can 
-be averaged to provide an indication of the location's exposure to 
-wind. The \pkg{fetchR} package 
-calculates the lengths of wind fetch vectors from all directions, at any 
-given location(s) on Earth, and can provide summaries, visualisations and KML 
+The fetch length from all directions (and from each quadrant) can
+be averaged to provide an indication of the location's exposure to
+wind. The \pkg{fetchR} package
+calculates the lengths of wind fetch vectors from all directions, at any
+given location(s) on Earth, and can provide summaries, visualisations and KML
 files along with the raw data.
 }
 \seealso{
 \code{\link{fetch}} for an extensive reproducible example.
 
-\code{vignette("introduction-to-fetchR")} for a short introduction 
+\code{vignette("introduction-to-fetchR")} for a short introduction
 to **fetchR**.
 }
 \keyword{package}
+
