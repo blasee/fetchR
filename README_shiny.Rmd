@@ -34,7 +34,7 @@ as a GIS shapefile with the NZGD2000 / New Zealand Transverse Mercator 2000
 (EPSG:2193) map projection. Once the contents have been unzipped, the files can 
 then be uploaded to the web application.
 
-![](./figures/upload_poly.png)
+![](./README_figures/upload_poly.png)
 
 ## 2) Upload a points shapefile
 
@@ -83,7 +83,7 @@ writeOGR(fetch_locs, "NZ_locations", "fetch_locations", "ESRI Shapefile")
 
 These files can now be uploaded to the web application.
 
-![](./figures/upload_point.png)
+![](./README_figures/upload_point.png)
 
 ##### Note
 While the polygon layer requires a map projection, this is not a requirement
