@@ -11,10 +11,24 @@ Why **fetchR**?
 
 Averaging the wind fetch for numerous directions at the same location is a reasonable measure of the overall wind exposure. This process of calculating wind fetch can be extremely time-consuming and tedious, particularly if a large number of fetch vectors are required at many locations. The **fetchR** package calculates wind fetch for any marine location on Earth. There are also plot methods to help visualise the wind exposure at the various locations, and methods to output the fetch vectors to a KML file for further investigation.
 
+Shiny application
+=================
+
+To use the **fetchR** package without even needing **R**, check out the [online version](https://blasee.shinyapps.io/fetchR_shiny/). For help on using the application refer to the [README](https://github.com/blasee/fetchR/blob/master/README_shiny.md#calculate-wind-fetch-using-the-shiny-application).
+
+Run the application locally
+---------------------------
+
+This application can also be run locally by first [installing **fetchR**](#installation) and running the following code in an interactive **R** session.
+
+``` r
+fetchR::runExample()
+```
+
 Installation
 ============
 
-You can install the latest version of **fetchR** from CRAN.
+You can install and load the latest version of **fetchR** from CRAN.
 
 ``` r
 # Install fetchR
@@ -103,7 +117,7 @@ Citation
     #> To cite package 'fetchR' in publications use:
     #> 
     #>   Blake Seers (2017). fetchR: Calculate Wind Fetch in R. R package
-    #>   version 2.0-1. https://cran.r-project.org/package=fetchR
+    #>   version 2.0-2. https://cran.r-project.org/package=fetchR
     #> 
     #> A BibTeX entry for LaTeX users is
     #> 
@@ -111,7 +125,7 @@ Citation
     #>     title = {fetchR: Calculate Wind Fetch in R},
     #>     author = {Blake Seers},
     #>     year = {2017},
-    #>     note = {R package version 2.0-1},
+    #>     note = {R package version 2.0-2},
     #>     url = {https://cran.r-project.org/package=fetchR},
     #>   }
 
