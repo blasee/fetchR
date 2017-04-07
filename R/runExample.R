@@ -15,7 +15,7 @@
 #'   runExample()
 #'
 #' @import shiny
-#' @importFrom shinyjs enable disable useShinyjs
+#' @importFrom shinyjs enable disable useShinyjs html
 #' @importFrom sp spTransform CRS is.projected
 #' @importFrom methods is as
 #' @importFrom purrr walk2

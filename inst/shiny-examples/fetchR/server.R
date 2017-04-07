@@ -1,71 +1,4 @@
-library(fetchR)
-library(sp)
-library(rgdal)
-
 options(shiny.maxRequestSize = 50 * 1024^2)
-
-fetch_r_file = function(poly_layer, point_layer, max_dist, directions, fn){
-  cat('# This file was created by the fetchR_shiny web application:
-# https://blasee.shinyapps.io/fetchR_shiny/
-
-# Unmodified, this file is only intended for interactive R sessions.
-
-# Install and load packages -----------------------------------------------
-
-# Install and load the latest CRAN release of fetchR
-if(!require(fetchR)){
-  install.packages("fetchR")
-  library(fetchR)
-}
-
-# Read in the shapefiles --------------------------------------------------
-
-# Navigate to the ', poly_layer, '.shp file
-my_coast = rgdal::readOGR(dirname(file.choose()), "', poly_layer, '")
-
-# Navigate to the ', point_layer, '.shp file
-my_sites = rgdal::readOGR(dirname(file.choose()), "', point_layer, '")
-
-# Calculate Fetch ---------------------------------------------------------
-
-# Polygon layer:       ', poly_layer, '
-# Points layer:        ', point_layer, '
-# Maximum distance:    ', max_dist, 'km
-# Directions per 90°:  ', directions, '
-
-my_fetch = fetch(my_coast, my_sites, ', max_dist, ', ', directions, ')
-my_fetch
-
-# Raw data ----------------------------------------------------------------
-
-# Transform "my_fetch" to have lon/lat coordinates
-my_fetch_latlon = spTransform(my_fetch, CRS("+init=epsg:4326))
-
-# Create a data frame containing the raw data
-my_fetch.df = as(my_fetch_latlon, "data.frame")
-
-# Plot in R ---------------------------------------------------------------
-
-plot(my_fetch, my_coast)
-
-# Output to KML -----------------------------------------------------------
-
-kml(my_fetch)
-message("my_fetch.kml was saved in: ", getwd())
-
-#  ------------------------------------------------------------------------
-
-# For more information on the fetchR package
-vignette("introduction-to-fetchR")
-
-# To cite the fetchR package in publications
-citation("fetchR")
-
-# If you encounter a problem when using this file, you can submit an issue here:
-# https://github.com/blasee/fetchR/issues/new
-',
-sep = "", file = fn)
-}
 
 shinyServer(function(input, output) {
 
@@ -124,13 +57,13 @@ shinyServer(function(input, output) {
     infiles = inFile$datapath
 
     # Directory containing the files
-    dir = unique(dirname(inFile$datapath))
+    dir_name = unique(dirname(inFile$datapath))
 
     # New names for the files (matching the input names)
-    outfiles = file.path(dir, inFile$name)
+    outfiles = file.path(dir_name, inFile$name)
     walk2(infiles, outfiles, ~file.rename(.x, .y))
 
-    x <- try(readOGR(dir, strsplit(inFile$name[1], "\\.")[[1]][1]), TRUE)
+    x <- try(readOGR(dir_name, strsplit(inFile$name[1], "\\.")[[1]][1]), TRUE)
 
     validate(need(class(x) != "try-error", "Could not read shapefile."))
 
@@ -139,7 +72,8 @@ shinyServer(function(input, output) {
 
     validate(need(is.projected(x),
                   "Please project the shapefile onto a suitable map projection."))
-    x
+    list(x = x,
+         dir_name = tail(strsplit(dir_name, "/")[[1]], 1))
   })
 
   pointShapeInput = reactive({
@@ -161,25 +95,26 @@ shinyServer(function(input, output) {
     infiles = inFile$datapath
 
     # Directory containing the files
-    dir = unique(dirname(inFile$datapath))
+    dir_name = unique(dirname(inFile$datapath))
 
     # New names for the files (matching the input names)
-    outfiles = file.path(dir, inFile$name)
+    outfiles = file.path(dir_name, inFile$name)
     walk2(infiles, outfiles, ~file.rename(.x, .y))
 
-    x <- try(readOGR(dir, strsplit(inFile$name[1], "\\.")[[1]][1]), TRUE)
+    x <- try(readOGR(dir_name, strsplit(inFile$name[1], "\\.")[[1]][1]), TRUE)
 
     validate(need(class(x) != "try-error", "Could not read shapefile."))
 
     validate(need(is(x, "SpatialPoints"),
                   "Please provide a '[Multi]Point' shapefile."))
-    x
+    list(x = x,
+         dir_name = tail(strsplit(dir_name, "/")[[1]], 1))
   })
 
-output$polygon_map <- renderPlot({
+  output$polygon_map <- renderPlot({
 
-    poly_layer = polyShapeInput()
-    point_layer = pointShapeInput()
+    poly_layer = polyShapeInput()$x
+    point_layer = pointShapeInput()$x
 
     if (is.null(input$polygon_shape) &
         input$submit == 0)
@@ -207,41 +142,38 @@ output$polygon_map <- renderPlot({
 
   calc_fetch = eventReactive(input$submit, {
 
-    poly_layer = polyShapeInput()
-    point_layer = pointShapeInput()
+    poly_layer = polyShapeInput()$x
+    point_layer = pointShapeInput()$x
 
     validate(need(all(input$n_dirs <= 20,
                       input$n_dirs > 0),
                   "Directions per quadrant: please choose a number between 1 and 20."))
 
-    # Must have a '[Nn]ame' column to get names
-    name_col = grep("^[Nn]ame$", names(point_layer))
+    withCallingHandlers({
+      html("text", "")
+      my_fetch = fetch(poly_layer,
+                       point_layer,
+                       max_dist = input$dist,
+                       n_directions = input$n_dirs,
+                       quiet = TRUE)
+      message("")
+    },
+    message = function(m){
+      emph_text = paste0("<strong>", m$message, "</strong>")
+      html(id = "text", html = emph_text)
+    })
 
-    if (length(name_col)) {
-      my_fetch = fetch(poly_layer,
-                       point_layer,
-                       max_dist = input$dist,
-                       n_directions = input$n_dirs,
-                       site_names = as.character(point_layer@data[, name_col]),
-                       quiet = TRUE)
-    } else{
-      my_fetch = fetch(poly_layer,
-                       point_layer,
-                       max_dist = input$dist,
-                       n_directions = input$n_dirs,
-                       quiet = TRUE)
-    }
     list(my_fetch = my_fetch,
          my_fetch_latlon = spTransform(my_fetch, CRS("+init=epsg:4326")))
   })
 
   output$fetch_plot = renderPlot({
-    plot(calc_fetch()$my_fetch, polyShapeInput())
-    })
+    plot(calc_fetch()$my_fetch, polyShapeInput()$x)
+  })
 
   output$summary = renderTable({
-    poly_layer = polyShapeInput()
-    point_layer = pointShapeInput()
+    poly_layer = polyShapeInput()$x
+    point_layer = pointShapeInput()$x
 
     if (is.null(input$polygon_shape) &
         input$submit == 0)
@@ -252,8 +184,8 @@ output$polygon_map <- renderPlot({
   rownames = TRUE, colnames = TRUE)
 
   output$distances = renderDataTable({
-    poly_layer = polyShapeInput()
-    point_layer = pointShapeInput()
+    poly_layer = polyShapeInput()$x
+    point_layer = pointShapeInput()$x
 
     if (is.null(input$polygon_shape) &
         input$submit == 0)
@@ -266,22 +198,25 @@ output$polygon_map <- renderPlot({
 
   output$dl_file = downloadHandler(
     filename = function(){
-      # Replace '.' with '_' in the file name
       paste0(strsplit(input$file_name, ".", fixed = TRUE)[[1]][1],
              switch(input$format,
                     CSV = ".csv",
                     KML = ".kml",
-                    R = ".R"
+                    R = ".zip"
              ))
     },
     content = function(file){
       switch(input$format,
              CSV = write.csv(as(calc_fetch()$my_fetch_latlon, "data.frame"), file, row.names = FALSE),
              KML = kml(calc_fetch()$my_fetch_latlon, file.name = file),
-             R = fetch_r_file(
+             R = create_zip(
+               polyShapeInput()$x,
+               pointShapeInput()$x,
                head(strsplit(input$polygon_shape$name, ".", fixed = TRUE)[[1]], -1),
                head(strsplit(input$point_shape$name, ".", fixed = TRUE)[[1]], -1),
-                              input$dist, input$n_dirs, file))
+               polyShapeInput()$dir_name,
+               pointShapeInput()$dir_name,
+               input$dist, input$n_dirs, file))
     }
   )
 })
