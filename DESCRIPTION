@@ -11,9 +11,7 @@ Imports:
     methods,
     rgeos,
     plotKML,
-    shiny,
-    shinyjs,
-    purrr
+    utils
 Suggests:
     knitr,
     ggplot2,
