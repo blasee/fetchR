@@ -28,19 +28,7 @@ Averaging the wind fetch for numerous directions at the same location is a reaso
 # Shiny application
 
 To use the **fetchR** package without even needing **R**, check out the 
-[online version](https://blasee.shinyapps.io/fetchR_shiny/). For help on using 
-the application refer to the
-[README](https://github.com/blasee/fetchR/blob/master/README_shiny.md#calculate-wind-fetch-using-the-shiny-application).
-
-## Run the application locally
-
-This application can also be run locally by first 
-[installing **fetchR**](#installation) and running the following code in an 
-interactive **R** session.
-
-```{r, eval = FALSE}
-fetchR::runExample()
-```
+[online version](https://blasee.shinyapps.io/fetchR_shiny/).
 
 # Installation
 
@@ -129,7 +117,7 @@ example(fetch)
 
 # Citation
 
-```{r, echo = FALSE}
+```{r}
 citation("fetchR")
 ```
 

@@ -7,6 +7,3 @@
 ^nz_poly/
 ^README_figures/
 ^\.gitignore$
-rsconnect/
-^README_shiny\.Rmd$
-^README_shiny\.md$

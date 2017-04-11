@@ -2,15 +2,15 @@
 
 ## Minor changes
 
-* The shiny web application has been incorporated into **fetchR**. To use the 
-  application locally you can now type `runExample()` or check out the 
-  [online version](https://blasee.shinyapps.io/fetchR_shiny/).
-
 * Use `on.exit` to close the KML file connection in `kml,Fetch` method.
 
 * Site names are automatically read from the data associated with the shapefile.
   The names have to be in a column with a name matching the regular expression;
   "^[Nn]ames{0,1}$".
+  
+* Check out the 
+  [online version](https://blasee.shinyapps.io/fetchR_shiny/) of the latest 
+  version of **fetchR**.
 
 # fetchR 2.0-0
 

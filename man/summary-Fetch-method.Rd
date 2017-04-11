@@ -2,8 +2,8 @@
 % Please edit documentation in R/fetch_class.R
 \docType{methods}
 \name{summary,Fetch-method}
-\alias{show,Fetch-method}
 \alias{summary,Fetch-method}
+\alias{show,Fetch-method}
 \title{Summarise a Fetch Object}
 \usage{
 \S4method{summary}{Fetch}(object)
@@ -24,4 +24,3 @@ fetch for the northerly component averages over the fetch vectors with
 directions between 315 (inclusive) and 45 (exclusive) degrees, i.e. the fetch
 vectors within the interval [315, 45).
 }
-

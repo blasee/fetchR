@@ -32,5 +32,5 @@ Description: Wind fetch is the unobstructed length of water over which wind can
     locations, and methods to output the fetch vectors to a KML file for further
     investigation.
 License: GPL-2
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 VignetteBuilder: knitr

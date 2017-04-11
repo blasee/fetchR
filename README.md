@@ -14,16 +14,7 @@ Averaging the wind fetch for numerous directions at the same location is a reaso
 Shiny application
 =================
 
-To use the **fetchR** package without even needing **R**, check out the [online version](https://blasee.shinyapps.io/fetchR_shiny/). For help on using the application refer to the [README](https://github.com/blasee/fetchR/blob/master/README_shiny.md#calculate-wind-fetch-using-the-shiny-application).
-
-Run the application locally
----------------------------
-
-This application can also be run locally by first [installing **fetchR**](#installation) and running the following code in an interactive **R** session.
-
-``` r
-fetchR::runExample()
-```
+To use the **fetchR** package without even needing **R**, check out the [online version](https://blasee.shinyapps.io/fetchR_shiny/).
 
 Installation
 ============
@@ -113,20 +104,23 @@ example(fetch)
 Citation
 ========
 
-    #> 
-    #> To cite package 'fetchR' in publications use:
-    #> 
-    #>   Blake Seers (2017). fetchR: Calculate Wind Fetch in R. R package
-    #>   version 2.0-2. https://cran.r-project.org/package=fetchR
-    #> 
-    #> A BibTeX entry for LaTeX users is
-    #> 
-    #>   @Manual{,
-    #>     title = {fetchR: Calculate Wind Fetch in R},
-    #>     author = {Blake Seers},
-    #>     year = {2017},
-    #>     note = {R package version 2.0-2},
-    #>     url = {https://cran.r-project.org/package=fetchR},
-    #>   }
+``` r
+citation("fetchR")
+#> 
+#> To cite package 'fetchR' in publications use:
+#> 
+#>   Blake Seers (2017). fetchR: Calculate Wind Fetch in R. R package
+#>   version 2.0-2. https://cran.r-project.org/package=fetchR
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Manual{,
+#>     title = {fetchR: Calculate Wind Fetch in R},
+#>     author = {Blake Seers},
+#>     year = {2017},
+#>     note = {R package version 2.0-2},
+#>     url = {https://cran.r-project.org/package=fetchR},
+#>   }
+```
 
 [1] This README contains data that was sourced from Land Information New Zealand without adaptation that is protected under CC-By Land Information New Zealand.

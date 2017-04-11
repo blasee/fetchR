@@ -25,4 +25,3 @@ which case it is converted to \code{\link{CRS}}}
 \description{
 spTransform for map projection and datum transformation
 }
-

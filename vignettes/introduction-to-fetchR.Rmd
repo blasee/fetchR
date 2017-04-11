@@ -28,9 +28,7 @@ This short vignette provides an introduction to the **fetchR** package by using 
 ## Shiny application
 
 To use the **fetchR** package without even needing **R**, check out the 
-[online version](https://blasee.shinyapps.io/fetchR_shiny/). For help on using 
-the application refer to the
-[README](https://github.com/blasee/fetchR/blob/master/README_shiny.md#calculate-wind-fetch-using-the-shiny-application).
+[online version](https://blasee.shinyapps.io/fetchR_shiny/).
 
 # Typical usage
 
