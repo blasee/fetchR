@@ -1,8 +1,6 @@
-# fetchR 2.0-1-999
+# fetchR 2.0-2
 
 ## Minor changes
-
-* Use `on.exit` to close the KML file connection in `kml,Fetch` method.
 
 * Site names are automatically read from the data associated with the shapefile.
   The names have to be in a column with a name matching the regular expression;
@@ -11,6 +9,12 @@
 * Check out the 
   [online version](https://blasee.shinyapps.io/fetchR_shiny/) of the latest 
   version of **fetchR**.
+
+# fetchR 2.0-1
+
+## Minor changes
+
+* Use `on.exit` to close the KML file connection in `kml,Fetch` method.
 
 # fetchR 2.0-0
 
