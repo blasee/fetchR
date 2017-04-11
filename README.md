@@ -1,5 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Build Status](https://travis-ci.org/blasee/fetchR.svg)](https://travis-ci.org/blasee/fetchR) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/fetchR)](https://cran.r-project.org/package=fetchR) [![](http://cranlogs.r-pkg.org/badges/fetchR)](http://cran.rstudio.com/web/packages/fetchR/index.html)
+[![Build Status](https://travis-ci.org/blasee/fetchR.svg)](https://travis-ci.org/blasee/fetchR) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/fetchR)](https://cran.r-project.org/package=fetchR) [![](http://cranlogs.r-pkg.org/badges/fetchR)](https://cran.r-project.org/package=fetchR)
 
 Wind fetch
 ==========
