@@ -14,7 +14,7 @@ Averaging the wind fetch for numerous directions at the same location is a reaso
 Shiny application
 =================
 
-To use the **fetchR** package without even needing **R**, check out the [online version](https://blasee.shinyapps.io/fetchR_shiny/).
+To use the **fetchR** package without even needing **R**, check out the [online version](http://windfetch.cer.auckland.ac.nz/).
 
 Installation
 ============

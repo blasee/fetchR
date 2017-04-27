@@ -25,10 +25,10 @@ The **fetchR** package calculates and summarises fetch vector lengths to assess 
 
 This short vignette provides an introduction to the **fetchR** package by using an example for calculating the wind fetch at 3 separate coastal locations around New Zealand. All the required steps are documented and all the code is available to reproduce this example and to build upon these fundamentals to suit individual requirements.
 
-## Shiny application
+## Online application
 
 To use the **fetchR** package without even needing **R**, check out the 
-[online version](https://blasee.shinyapps.io/fetchR_shiny/).
+[online version](http://windfetch.cer.auckland.ac.nz/).
 
 # Typical usage
 

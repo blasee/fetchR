@@ -22,6 +22,8 @@
 #' @seealso \code{\link{fetch}} for an extensive reproducible example.
 #' @seealso \code{vignette("introduction-to-fetchR")} for a short introduction
 #' to **fetchR**.
+#' @seealso \url{http://windfetch.cer.auckland.ac.nz/} for the online web 
+#' application.
 #' @name fetchR
 #' @docType package
 #' @keywords package
