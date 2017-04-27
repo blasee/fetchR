@@ -1,4 +1,4 @@
-# fetchR 2.0-2
+# fetchR 2.1-0
 
 ## Minor changes
 
@@ -7,12 +7,7 @@
   "^[Nn]ames{0,1}$".
   
 * Check out the 
-  [online version](https://blasee.shinyapps.io/fetchR_shiny/) of the latest 
-  version of **fetchR**.
-
-# fetchR 2.0-1
-
-## Minor changes
+  [online web application](http://windfetch.cer.auckland.ac.nz/) for **fetchR**.
 
 * Use `on.exit` to close the KML file connection in `kml,Fetch` method.
 
