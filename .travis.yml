@@ -8,12 +8,12 @@ before_install:
   Rscript -e 'update.packages(ask = FALSE)'
 
 r_packages:
-  - rgeos
-  - sp
   - covr
   
 r_binary_packages:
   - rgdal
+  - rgeos
+  - sp
 
 notifications:
   email:
