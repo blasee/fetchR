@@ -20,7 +20,7 @@ There were no ERRORs or WARNINGs.
     
 Possibly mis-spelled words in DESCRIPTION:
   KML (20:61)
-  fetchR (17:65)
+  InVEST (15:38)
 
 This is the correct email address and the possibly mis-spelled words in the 
 DESCRIPTION are spelled correctly.

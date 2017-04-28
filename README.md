@@ -110,7 +110,7 @@ citation("fetchR")
 #> To cite package 'fetchR' in publications use:
 #> 
 #>   Blake Seers (2017). fetchR: Calculate Wind Fetch in R. R package
-#>   version 2.0-2. https://cran.r-project.org/package=fetchR
+#>   version 2.1-0. https://cran.r-project.org/package=fetchR
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -118,7 +118,7 @@ citation("fetchR")
 #>     title = {fetchR: Calculate Wind Fetch in R},
 #>     author = {Blake Seers},
 #>     year = {2017},
-#>     note = {R package version 2.0-2},
+#>     note = {R package version 2.1-0},
 #>     url = {https://cran.r-project.org/package=fetchR},
 #>   }
 ```
