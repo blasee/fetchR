@@ -1,3 +1,11 @@
+## Resubmission
+This is a resubmission. In this version I have:
+
+* Removed the redundant "in R" in the package title
+* Surrounded package names in the DESCRIPTION file with single quotes
+* Included a reference to the InVEST coastal vulnerability model and clarified
+  the reasons for which wind fetch is useful and likely calculated.
+
 ## Test environments
 * local ubuntu install 16.04, R 3.4.0
 * ubuntu 14.04 (on travis-ci; devel and release)
