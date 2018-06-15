@@ -12,7 +12,8 @@
 
 create_line_list = function(d, end_points){
   # 1) Create the matrix of all the lons and lats
-  all_mat = rbind(do.call("rbind", rep(list(d@coords), nrow(end_points))), end_points)
+  all_mat = rbind(do.call("rbind", rep(list(d@coords), nrow(end_points)))[, 1:2], 
+                  end_points)
   
   # 2) Split this matrix into a list
   all_list = split(all_mat, 1:nrow(end_points))
