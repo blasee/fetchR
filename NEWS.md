@@ -1,3 +1,10 @@
+# fetchR 2.1-1
+
+## Minor changes
+
+* You can now specify up to 1 direction per degree on the compass rose 
+(`n_directions = 90`).
+
 # fetchR 2.1-0
 
 ## Minor changes
