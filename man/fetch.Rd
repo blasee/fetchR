@@ -44,7 +44,7 @@ This allows wind fetch to be calculated anywhere around the globe.
 \details{
 The function takes a \code{\link[sp]{SpatialPolygons-class}} object 
 (\code{polygon_layer}) that represents the coastline, surrounding islands, 
-and any other obstructions, and calculates the wind fetch for every specifed 
+and any other obstructions, and calculates the wind fetch for every specified 
 direction. This is calculated for all the user-defined sites, that are 
 represented as the point geometries in a 
 \code{\link[sp]{SpatialPoints-class}} object.
