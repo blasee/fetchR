@@ -1,5 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Build Status](https://travis-ci.org/blasee/fetchR.svg)](https://travis-ci.org/blasee/fetchR) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/fetchR)](https://cran.r-project.org/package=fetchR) [![](http://cranlogs.r-pkg.org/badges/fetchR)](https://cran.r-project.org/package=fetchR)
+[![Build Status](https://travis-ci.org/blasee/fetchR.svg)](https://travis-ci.org/blasee/fetchR) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/fetchR)](https://cran.r-project.org/package=fetchR) [![](https://cranlogs.r-pkg.org/badges/fetchR)](https://cran.r-project.org/package=fetchR)
 
 Wind fetch
 ==========
@@ -109,16 +109,16 @@ citation("fetchR")
 #> 
 #> To cite package 'fetchR' in publications use:
 #> 
-#>   Blake Seers (2017). fetchR: Calculate Wind Fetch in R. R package
-#>   version 2.1-0. https://cran.r-project.org/package=fetchR
+#>   Blake Seers (2018). fetchR: Calculate Wind Fetch. R package
+#>   version 2.1-1. https://cran.r-project.org/package=fetchR
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
-#>     title = {fetchR: Calculate Wind Fetch in R},
+#>     title = {fetchR: Calculate Wind Fetch},
 #>     author = {Blake Seers},
-#>     year = {2017},
-#>     note = {R package version 2.1-0},
+#>     year = {2018},
+#>     note = {R package version 2.1-1},
 #>     url = {https://cran.r-project.org/package=fetchR},
 #>   }
 ```
