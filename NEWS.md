@@ -1,3 +1,9 @@
+# fetchR 2.1-2
+
+## Bug fixes
+
+* Fix future warnings from CRAN checks on R-devel (#10)
+
 # fetchR 2.1-1
 
 ## Minor changes
@@ -11,7 +17,7 @@
 
 * Site names are automatically read from the data associated with the shapefile.
   The names have to be in a column with a name matching the regular expression;
-  "^[Nn]ames{0,1}$".
+  `^[Nn]ames{0,1}$`.
   
 * Check out the 
   [online web application](http://windfetch.cer.auckland.ac.nz/) for **fetchR**.
@@ -39,4 +45,4 @@ the slow, iterative algorithm used by the package's predecessors.
 
 ## Minor changes
 
- Create a vignette for the package; `vignette("introduction-to-fetchR")`.
+* Create a vignette for the package; `vignette("introduction-to-fetchR")`.

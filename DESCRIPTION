@@ -1,7 +1,7 @@
 Package: fetchR
 Type: Package
 Title: Calculate Wind Fetch
-Version: 2.1-1-9999
+Version: 2.1-2
 Date: 2020-02-13
 Authors@R: person("Blake", "Seers", role = c("aut", "cre"),
     email = "blake.seers@gmail.com")
@@ -33,5 +33,6 @@ Description: Wind fetch is the unobstructed length of water over which wind can
     locations, and methods to output the fetch vectors to a KML file for further
     investigation.
 License: GPL-2
+Encoding: UTF-8
 RoxygenNote: 7.0.2
 VignetteBuilder: knitr
