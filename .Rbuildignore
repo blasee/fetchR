@@ -4,6 +4,6 @@
 ^\.travis\.yml$
 ^README\.Rmd$
 ^cran-comments\.md$
-^nz_poly$
+^nz_poly_proj$
 ^README_figures$
 ^\.gitignore$

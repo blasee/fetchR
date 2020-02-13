@@ -2,5 +2,5 @@
 *.Rproj
 .Rproj.user
 DESCRIPTION~
-nz_poly/
+nz_poly_proj/
 *_cache/
