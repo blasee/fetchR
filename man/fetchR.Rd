@@ -3,7 +3,6 @@
 \docType{package}
 \name{fetchR}
 \alias{fetchR}
-\alias{fetchR-package}
 \title{Calculate Wind Exposure with the \pkg{fetchR} Package}
 \description{
 The \pkg{fetchR} package allows for an objective calculation of wind fetch

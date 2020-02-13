@@ -4,8 +4,14 @@
 \alias{fetch}
 \title{Calculate Wind Fetch}
 \usage{
-fetch(polygon_layer, site_layer, max_dist = 300, n_directions = 9,
-  site_names, quiet = FALSE)
+fetch(
+  polygon_layer,
+  site_layer,
+  max_dist = 300,
+  n_directions = 9,
+  site_names,
+  quiet = FALSE
+)
 }
 \arguments{
 \item{polygon_layer}{\code{\link[sp]{SpatialPolygons}}* object where the

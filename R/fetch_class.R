@@ -118,7 +118,6 @@ setMethod("show", "Fetch", function(object){
 #' @param x \code{\link{Fetch}} object to be transformed
 #' @param CRSobj object of class \code{\link[sp]{CRS}}, or of class character in
 #'               which case it is converted to \code{\link{CRS}}
-#' @param ... further arguments (ignored)
 #' @importFrom methods setMethod new
 #' @importFrom sp spTransform CRS
 #' @return \code{\link{Fetch}} object with coordinates transformed to the
