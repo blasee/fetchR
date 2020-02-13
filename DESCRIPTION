@@ -22,11 +22,9 @@ BugReports: https://github.com/blasee/fetchR/issues
 Description: Wind fetch is the unobstructed length of water over which wind can
     blow from a certain direction. The wind fetch is typically calculated for many directions
     around the compass rose for a given location, which can then be incorporated 
-    into a larger model (such as the InVEST coastal vulnerability model;
-    <http://data.naturalcapitalproject.org/invest-releases/documentation/2_2_0/coastal_vulnerability.html>),
-    or simply averaged for a reasonable measure of 
-    the overall wind exposure for a specific marine location. The process of calculating
-    wind fetch can be extremely time-consuming and tedious, particularly if a large
+    into a larger model, or simply averaged for a reasonable measure of 
+    the overall wind exposure for a specific location. The process of calculating
+    wind fetch can be tedious, particularly if a large
     number of fetch vectors are required at many locations. The 'fetchR' package
     calculates wind fetch and summarises the information efficiently. There are 
     also plot methods to help visualise the wind exposure at the various
@@ -34,5 +32,6 @@ Description: Wind fetch is the unobstructed length of water over which wind can
     investigation.
 License: GPL-2
 Encoding: UTF-8
+Language: en-gb
 RoxygenNote: 7.0.2
 VignetteBuilder: knitr
