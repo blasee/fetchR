@@ -19,8 +19,7 @@
   The names have to be in a column with a name matching the regular expression;
   `^[Nn]ames{0,1}$`.
   
-* Check out the 
-  [online web application](http://windfetch.cer.auckland.ac.nz/) for **fetchR**.
+* Created a [shiny application](https://github.com/blasee/fetchR#shiny-application) for **fetchR**.
 
 * Use `on.exit` to close the KML file connection in `kml,Fetch` method.
 

@@ -28,7 +28,7 @@ This short vignette provides an introduction to the **fetchR** package by using 
 ## Online application
 
 To use the **fetchR** package without even needing **R**, check out the 
-[online version](http://windfetch.cer.auckland.ac.nz/).
+[online version](https://github.com/blasee/fetchR#shiny-application).
 
 # Typical usage
 
