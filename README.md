@@ -27,12 +27,6 @@ location on Earth. There are also plot methods to help visualise the
 wind exposure at the various locations, and methods to output the fetch
 vectors to a KML file for further investigation.
 
-Shiny application
-=================
-
-To use the **fetchR** package without even needing **R**, check out the
-[online version](http://windfetch.cer.auckland.ac.nz/).
-
 Installation
 ============
 
@@ -141,16 +135,16 @@ citation("fetchR")
 #> 
 #> To cite package 'fetchR' in publications use:
 #> 
-#>   Blake Seers (2018). fetchR: Calculate Wind Fetch. R package version
-#>   2.1-1. https://cran.r-project.org/package=fetchR
+#>   Blake Seers (2020). fetchR: Calculate Wind Fetch. R package version
+#>   2.1-2. https://cran.r-project.org/package=fetchR
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
 #>     title = {fetchR: Calculate Wind Fetch},
 #>     author = {Blake Seers},
-#>     year = {2018},
-#>     note = {R package version 2.1-1},
+#>     year = {2020},
+#>     note = {R package version 2.1-2},
 #>     url = {https://cran.r-project.org/package=fetchR},
 #>   }
 ```

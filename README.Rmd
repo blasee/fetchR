@@ -26,11 +26,6 @@ Wind fetch is an important measurement in coastal applications. It provides a me
 
 Averaging the wind fetch for numerous directions at the same location is a reasonable measure of the overall wind exposure. This process of calculating wind fetch can be extremely time-consuming and tedious, particularly if a large number of fetch vectors are required at many locations. The **fetchR** package calculates wind fetch for any marine location on Earth. There are also plot methods to help visualise the wind exposure at the various locations, and methods to output the fetch vectors to a KML file for further investigation.
 
-# Shiny application
-
-To use the **fetchR** package without even needing **R**, check out the 
-[online version](http://windfetch.cer.auckland.ac.nz/).
-
 # Installation
 
 You can install and load the latest version of **fetchR** from CRAN.
