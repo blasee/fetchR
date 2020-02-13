@@ -30,8 +30,5 @@ files along with the raw data.
 
 \code{vignette("introduction-to-fetchR")} for a short introduction
 to **fetchR**.
-
-\url{http://windfetch.cer.auckland.ac.nz/} for the online web 
-application.
 }
 \keyword{package}
